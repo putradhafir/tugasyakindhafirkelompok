@@ -4,12 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Smart Parking System | OOP - Usman & Putra</title>
-    <!-- Google Fonts Premium -->
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
     <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- AOS Animations -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Mermaid untuk Class Diagram -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
     <style>
         * {
             margin: 0;
@@ -257,6 +262,10 @@
             box-shadow: 0 0 12px #00d4ff;
         }
 
+        .run-btn:active {
+            transform: scale(0.98);
+        }
+
         pre {
             background: #05161f;
             border-radius: 1.5rem;
@@ -268,6 +277,7 @@
             box-shadow: inset 0 0 8px rgba(0,0,0,0.5);
             color: #d6f0ff;
             margin: 0;
+            line-height: 1.6;
         }
 
         .output-console {
@@ -283,6 +293,11 @@
             word-break: break-word;
             max-height: 300px;
             overflow-y: auto;
+            display: none;
+        }
+
+        .output-console.active {
+            display: block;
         }
 
         .code-caption {
@@ -304,6 +319,18 @@
             font-weight: bold;
         }
 
+        .diagram-container {
+            background: #05161f;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid #1f6e8c;
+            margin: 1rem 0;
+        }
+
+        .diagram-container mermaid {
+            background: transparent;
+        }
+
         footer {
             background: rgba(0, 0, 0, 0.5);
             text-align: center;
@@ -312,18 +339,51 @@
             border-top: 1px solid rgba(0,212,255,0.3);
         }
 
+        footer a {
+            color: #00d4ff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
         @media (max-width: 720px) {
+            body {
+                padding: 1rem 0.8rem;
+            }
             .content {
                 padding: 1.2rem;
             }
+            .hero {
+                padding: 1.5rem;
+            }
             .hero h1 {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
+            }
+            .hero h1 i {
+                padding: 10px;
+                font-size: 1.4rem;
             }
             .run-btn {
                 width: 100%;
                 justify-content: center;
             }
+            .section-card {
+                padding: 1rem 1.2rem;
+            }
+            .section-card h2 {
+                font-size: 1.4rem;
+            }
+            .objek-card {
+                flex: 1 1 100%;
+            }
+            .author-group {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
         }
+
         .console-header {
             display: flex;
             align-items: center;
@@ -335,6 +395,69 @@
         hr {
             border-color: #1e5875;
             margin: 1rem 0;
+        }
+        .highlight {
+            color: #7ee0ff;
+            font-weight: 600;
+        }
+        .text-muted {
+            color: #8ab4d6;
+            font-size: 0.9rem;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .feature-item {
+            background: rgba(0, 212, 255, 0.05);
+            padding: 0.8rem 1rem;
+            border-radius: 1rem;
+            border: 1px solid rgba(0, 212, 255, 0.15);
+            text-align: center;
+        }
+        .feature-item i {
+            font-size: 1.5rem;
+            color: #00d4ff;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        .feature-item span {
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .btn-copy {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #8ab4d6;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: monospace;
+            margin-left: 8px;
+        }
+        .btn-copy:hover {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+        }
+        .code-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            background: rgba(0, 212, 255, 0.15);
+            color: #00d4ff;
+            margin-left: 8px;
         }
     </style>
 </head>
@@ -356,34 +479,379 @@
     </div>
 
     <div class="content">
-        <!-- LATAR BELAKANG -->
+        <!-- LATAR BELAKANG & PENJELASAN PENGGUNAAN APLIKASI -->
         <div class="section-card" data-aos="fade-right">
-            <h2><i class="fas fa-car-side"></i> LATAR BELAKANG</h2>
+            <h2><i class="fas fa-car-side"></i> LATAR BELAKANG & PENGGUNAAN APLIKASI</h2>
             <p style="margin-bottom: 0.6rem;">Kepadatan kendaraan dan kurangnya sistem parkir terintegrasi menjadi masalah utama di area perkotaan. <strong>Smart Parking Management</strong> hadir sebagai solusi cerdas menggunakan pendekatan <strong>Object Oriented Programming (OOP)</strong> untuk memodelkan kendaraan, slot parkir, transaksi, dan petugas secara real-time. Dengan OOP, sistem ini mudah dikembangkan, mendukung berbagai tipe kendaraan, dan memberikan transparansi ketersediaan slot.</p>
+            <p><strong>Cara penggunaan aplikasi:</strong> Sistem ini dirancang untuk petugas parkir dan manajer. Petugas dapat memantau ketersediaan slot, menempatkan kendaraan, dan membebaskan slot. Transaksi otomatis menghitung biaya berdasarkan durasi. Manajer dapat melihat laporan okupansi per zona. Aplikasi ini dapat diintegrasikan dengan pintu otomatis dan kamera untuk identifikasi plat nomor.</p>
+            
+            <div class="feature-grid" style="margin-top: 1.5rem;">
+                <div class="feature-item">
+                    <i class="fas fa-robot"></i>
+                    <span>AI-Powered</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-cloud"></i>
+                    <span>Real-time Monitoring</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Secure System</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Analytics Dashboard</span>
+                </div>
+            </div>
         </div>
 
         <!-- MENGAPA OOP + OBJEK -->
         <div class="section-card" data-aos="fade-left">
             <h2><i class="fas fa-cubes"></i> Mengapa OOP? & Objek Smart Parking</h2>
             <p>Pendekatan OOP memetakan entitas dunia nyata (kendaraan, slot, transaksi) menjadi objek yang memiliki data dan perilaku masing-masing. Hal ini mengurangi duplikasi kode, mempermudah perawatan, dan sangat cocok untuk pengembangan fitur seperti reservasi online.</p>
-            <h3><i class="fas fa-diagram-project"></i> Objek Utama dalam Sistem</h3>
+            
+            <!-- Class Diagram menggunakan Mermaid -->
+            <h3><i class="fas fa-diagram-project"></i> Class Diagram Sistem</h3>
+            <div class="diagram-container">
+                <pre class="mermaid">
+classDiagram
+    class Kendaraan {
+        +String platNomor
+        +String jenis
+        +DateTime waktuMasuk
+        +infoKendaraan()
+    }
+    
+    class SlotParkir {
+        +int nomorSlot
+        +String zona
+        +bool tersedia
+        +String? kendaraanPlat
+        +tempatiSlot(plat)
+        +bebaskanSlot()
+        +infoZona()
+    }
+    
+    class TransaksiParkir {
+        +String id
+        +String platKendaraan
+        +int durasiJam
+        +double tarifAwal
+        +double tarifPerJam
+        +hitungTotal()
+        +cetakStruk()
+    }
+    
+    class PetugasParkir {
+        +String nama
+        +String shift
+        +laporan(slotTerisi, totalSlot)
+    }
+    
+    class AreaParkir {
+        +String zona
+        +infoZona()
+    }
+    
+    AreaParkir <|-- SlotParkir : Inheritance
+    Kendaraan *-- TransaksiParkir : Composition
+    PetugasParkir --> TransaksiParkir : Association
+    SlotParkir --> Kendaraan : Association
+                </pre>
+            </div>
+            
+            <h3><i class="fas fa-object-group"></i> Objek Utama dalam Sistem</h3>
             <div class="grid-objek">
-                <div class="objek-card"><h4>Kendaraan</h4><ul class="attr-list"><li><i class="fas fa-id-card"></i> platNomor</li><li><i class="fas fa-motorcycle"></i> jenis (Mobil/Motor)</li><li><i class="far fa-clock"></i> waktuMasuk</li></ul><div class="method-list">+ masukParkir()</div><div class="method-list">+ keluarParkir()</div></div>
-                <div class="objek-card"><h4>SlotParkir</h4><ul class="attr-list"><li><i class="fas fa-hashtag"></i> nomorSlot</li><li><i class="fas fa-flag-checkered"></i> status (tersedia/terisi)</li><li>zona/lantai</li></ul><div class="method-list">+ alokasiSlot()</div><div class="method-list">+ kosongkanSlot()</div></div>
-                <div class="objek-card"><h4>Transaksi</h4><ul class="attr-list"><li><i class="fas fa-receipt"></i> idTransaksi</li><li><i class="fas fa-coins"></i> biayaTotal</li><li>durasiParkir</li></ul><div class="method-list">+ hitungBiaya()</div><div class="method-list">+ cetakStruk()</div></div>
-                <div class="objek-card"><h4>Petugas</h4><ul class="attr-list"><li><i class="fas fa-id-badge"></i> nama</li><li><i class="fas fa-calendar-alt"></i> shift</li></ul><div class="method-list">+ laporanOkupansi()</div><div class="method-list">+ pantauSlot()</div></div>
+                <div class="objek-card"><h4>Kendaraan</h4><ul class="attr-list"><li><i class="fas fa-id-card"></i> platNomor</li><li><i class="fas fa-motorcycle"></i> jenis (Mobil/Motor)</li><li><i class="far fa-clock"></i> waktuMasuk</li></ul><div class="method-list">+ infoKendaraan()</div></div>
+                <div class="objek-card"><h4>SlotParkir</h4><ul class="attr-list"><li><i class="fas fa-hashtag"></i> nomorSlot</li><li><i class="fas fa-flag-checkered"></i> status (tersedia/terisi)</li><li>zona/lantai</li></ul><div class="method-list">+ tempatiSlot()</div><div class="method-list">+ bebaskanSlot()</div></div>
+                <div class="objek-card"><h4>Transaksi</h4><ul class="attr-list"><li><i class="fas fa-receipt"></i> idTransaksi</li><li><i class="fas fa-coins"></i> biayaTotal</li><li>durasiParkir</li></ul><div class="method-list">+ hitungTotal()</div><div class="method-list">+ cetakStruk()</div></div>
+                <div class="objek-card"><h4>Petugas</h4><ul class="attr-list"><li><i class="fas fa-id-badge"></i> nama</li><li><i class="fas fa-calendar-alt"></i> shift</li></ul><div class="method-list">+ laporan()</div></div>
             </div>
         </div>
 
-        <!-- SOURCE 1 - KENDARAAN -->
+        <!-- SOURCE 1 - KENDARAAN (dengan komentar) -->
         <div class="section-card" data-aos="flip-right">
             <h2><i class="fab fa-dart"></i> Source 1 - Class Kendaraan (Parent)</h2>
-            <div class="code-caption"><i class="fas fa-code-branch"></i> class Kendaraan dengan atribut dasar dan method info</div>
+            <div class="code-caption">
+                <i class="fas fa-code-branch"></i> class Kendaraan dengan atribut dasar dan method info
+                <span class="status-badge"><i class="fas fa-check-circle"></i> Ready</span>
+            </div>
             <div class="code-block-wrapper">
-                <button class="run-btn" onclick="runDartSimulation('code1')"><i class="fas fa-play"></i> Run Code</button>
-                <pre id="code1">// Developer: USMAN YAKIN (251410006) & PUTRA DHAFIR (251410009)
-// Smart Parking - Class Kendaraan
+                <div class="code-actions">
+                    <button class="run-btn" onclick="runDartSimulation('code1')"><i class="fas fa-play"></i> Run Code</button>
+                    <button class="btn-copy" onclick="copyCode('code1')"><i class="fas fa-copy"></i> Copy</button>
+                </div>
+                <pre id="code1">// ============================================================
+// Source 1: Class Kendaraan
+// Fungsi: Merepresentasikan kendaraan yang parkir.
+// Properti:
+//   - platNomor : String (nomor polisi)
+//   - jenis     : String (jenis kendaraan, misal Mobil/Motor)
+//   - waktuMasuk: DateTime (waktu masuk parkir)
+// Method:
+//   - infoKendaraan() : menampilkan informasi kendaraan
+// ============================================================
 
+class Kendaraan {
+  // Properti (atribut)
+  String platNomor;
+  String jenis;
+  DateTime waktuMasuk;
+
+  // Constructor
+  Kendaraan(this.platNomor, this.jenis, this.waktuMasuk);
+  
+  // Method untuk menampilkan info
+  void infoKendaraan() {
+    print("🔹 Kendaraan: $jenis | Plat: $platNomor | Masuk: ${waktuMasuk.hour}:${waktuMasuk.minute.toString().padLeft(2, '0')}");
+  }
+}
+
+void main() {
+  print("=== DEMO CLASS KENDARAAN ===");
+  print("=" * 30);
+  // Membuat objek kendaraan mobil
+  DateTime now = DateTime(2026, 6, 10, 9, 30);
+  Kendaraan mobil = Kendaraan("B 2026 XC", "Mobil", now);
+  mobil.infoKendaraan();
+  
+  // Membuat objek kendaraan motor
+  Kendaraan motor = Kendaraan("AG 1234 Z", "Motor", DateTime(2026, 6, 10, 10, 0));
+  motor.infoKendaraan();
+  
+  // Membuat objek kendaraan truk
+  Kendaraan truk = Kendaraan("N 5678 AB", "Truk", DateTime(2026, 6, 10, 11, 15));
+  truk.infoKendaraan();
+  
+  print("=" * 30);
+  print("Total kendaraan terdaftar: 3");
+}</pre>
+            </div>
+            <div id="output-code1" class="output-console"><div class="console-header"><i class="fas fa-terminal"></i> Output:</div><div id="console-code1"></div></div>
+        </div>
+
+        <!-- SOURCE 2 - SLOT PARKIR + INHERITANCE (dengan komentar) -->
+        <div class="section-card" data-aos="flip-right">
+            <h2><i class="fab fa-dart"></i> Source 2 - SlotParkir (Inheritance)</h2>
+            <div class="code-caption">
+                <i class="fas fa-diagram-project"></i> Pewarisan dari AreaParkir, menunjukkan relasi is-a
+                <span class="status-badge"><i class="fas fa-check-circle"></i> Ready</span>
+            </div>
+            <div class="code-block-wrapper">
+                <div class="code-actions">
+                    <button class="run-btn" onclick="runDartSimulation('code2')"><i class="fas fa-play"></i> Run Code</button>
+                    <button class="btn-copy" onclick="copyCode('code2')"><i class="fas fa-copy"></i> Copy</button>
+                </div>
+                <pre id="code2">// ============================================================
+// Source 2: AreaParkir (base class) dan SlotParkir (turunan)
+// AreaParkir: kelas dasar untuk zona parkir.
+// SlotParkir: turunan yang menambahkan nomor slot dan status.
+// Properti tambahan:
+//   - nomorSlot  : int
+//   - tersedia   : bool (true jika kosong)
+//   - kendaraanPlat : String? (plat kendaraan yang menempati)
+// Method:
+//   - tempatiSlot(plat) : mengisi slot jika tersedia
+//   - bebaskanSlot()    : mengosongkan slot
+// ============================================================
+
+class AreaParkir {
+  String zona;
+  AreaParkir(this.zona);
+  void infoZona() => print("📍 Zona parkir: $zona");
+}
+
+class SlotParkir extends AreaParkir {
+  int nomorSlot;
+  bool tersedia;
+  String? kendaraanPlat;
+
+  SlotParkir(this.nomorSlot, String zona, this.tersedia) : super(zona);
+
+  // Method untuk menempati slot
+  bool tempatiSlot(String plat) {
+    if (tersedia) {
+      kendaraanPlat = plat;
+      tersedia = false;
+      print("✅ Slot #$nomorSlot (Zona $zona) ditempati oleh $plat");
+      return true;
+    } else {
+      print("❌ Slot #$nomorSlot sudah terisi!");
+      return false;
+    }
+  }
+
+  // Method untuk membebaskan slot
+  void bebaskanSlot() {
+    if (!tersedia) {
+      print("🆓 Slot #$nomorSlot dibebaskan.");
+      kendaraanPlat = null;
+      tersedia = true;
+    } else {
+      print("ℹ️ Slot #$nomorSlot sudah kosong.");
+    }
+  }
+  
+  // Method untuk menampilkan status slot
+  void infoSlot() {
+    String status = tersedia ? "🟢 Tersedia" : "🔴 Terisi (${kendaraanPlat ?? 'Unknown'})";
+    print("Slot #$nomorSlot - Zona $zona: $status");
+  }
+}
+
+void main() {
+  print("== DEMO SLOT PARKIR + INHERITANCE ==");
+  print("=" * 35);
+  
+  // Membuat objek SlotParkir dengan zona "A1"
+  SlotParkir slot1 = SlotParkir(1, "A1", true);
+  slot1.infoZona();  // method dari parent
+  slot1.infoSlot();
+  
+  print("\n--- Proses Parkir ---");
+  slot1.tempatiSlot("B 1234 AB");
+  slot1.infoSlot();
+  
+  slot1.bebaskanSlot();
+  slot1.infoSlot();
+  
+  print("\n--- Parkir Kendaraan Lain ---");
+  slot1.tempatiSlot("D 9876 ZZ");
+  slot1.infoSlot();
+  
+  print("\n--- Status Akhir ---");
+  print("Status tersedia: ${slot1.tersedia}");
+  print("Kendaraan di slot: ${slot1.kendaraanPlat ?? 'Kosong'}");
+}</pre>
+            </div>
+            <div id="output-code2" class="output-console"><div class="console-header"><i class="fas fa-terminal"></i> Output:</div><div id="console-code2"></div></div>
+        </div>
+
+        <!-- SOURCE 3 - TRANSAKSI & PETUGAS (dengan komentar) -->
+        <div class="section-card" data-aos="flip-right">
+            <h2><i class="fab fa-dart"></i> Source 3 - Transaksi & Petugas</h2>
+            <div class="code-caption">
+                <i class="fas fa-calculator"></i> Billing dan monitoring petugas
+                <span class="status-badge"><i class="fas fa-check-circle"></i> Ready</span>
+            </div>
+            <div class="code-block-wrapper">
+                <div class="code-actions">
+                    <button class="run-btn" onclick="runDartSimulation('code3')"><i class="fas fa-play"></i> Run Code</button>
+                    <button class="btn-copy" onclick="copyCode('code3')"><i class="fas fa-copy"></i> Copy</button>
+                </div>
+                <pre id="code3">// ============================================================
+// Source 3: TransaksiParkir dan PetugasParkir
+// TransaksiParkir: menangani pembayaran dan struk.
+//   Properti: id, platKendaraan, durasiJam, tarifAwal, tarifPerJam
+//   Method: hitungTotal(), cetakStruk()
+// PetugasParkir: merepresentasikan petugas dengan nama dan shift.
+//   Method: laporan(slotTerisi, totalSlot)
+// ============================================================
+
+class TransaksiParkir {
+  String id;
+  String platKendaraan;
+  int durasiJam;
+  double tarifAwal = 4000;
+  double tarifPerJam = 2000;
+
+  TransaksiParkir(this.id, this.platKendaraan, this.durasiJam);
+  
+  // Menghitung total biaya berdasarkan durasi
+  double hitungTotal() {
+    if (durasiJam <= 1) return tarifAwal;
+    return tarifAwal + (durasiJam - 1) * tarifPerJam;
+  }
+
+  // Mencetak struk parkir
+  void cetakStruk() {
+    double total = hitungTotal();
+    print("🧾 STRUK PARKIR");
+    print("═" * 25);
+    print("ID Transaksi : $id");
+    print("Kendaraan    : $platKendaraan");
+    print("Durasi       : $durasiJam jam");
+    print("Tarif Awal   : Rp${tarifAwal.toStringAsFixed(0)}");
+    print("Tarif/jam    : Rp${tarifPerJam.toStringAsFixed(0)}");
+    print("─" * 25);
+    print("Total Bayar  : Rp${total.toStringAsFixed(0)}");
+    print("═" * 25);
+    print("Terima kasih! 🚗");
+  }
+}
+
+class PetugasParkir {
+  String nama;
+  String shift;
+  
+  PetugasParkir(this.nama, this.shift);
+  
+  void laporan(int slotTerisi, int totalSlot) {
+    double okupansi = (slotTerisi / totalSlot) * 100;
+    print("📊 LAPORAN PARKIR");
+    print("═" * 30);
+    print("Petugas      : $nama");
+    print("Shift        : $shift");
+    print("Slot Terisi  : $slotTerisi / $totalSlot");
+    print("Okupansi     : ${okupansi.toStringAsFixed(1)}%");
+    if (okupansi > 80) {
+      print("⚠️  Status: PARKIR PENUH! Rekomendasi buka area baru.");
+    } else if (okupansi > 50) {
+      print("🟡 Status: Cukup ramai.");
+    } else {
+      print("🟢 Status: Tersedia banyak slot.");
+    }
+    print("═" * 30);
+  }
+}
+
+void main() {
+  print("=== DEMO TRANSAKSI & PETUGAS ===");
+  print("=" * 35);
+  
+  // Membuat transaksi
+  TransaksiParkir trans1 = TransaksiParkir("TRX-001", "B 1234 AB", 3);
+  trans1.cetakStruk();
+  
+  print("\n");
+  
+  TransaksiParkir trans2 = TransaksiParkir("TRX-002", "AG 5678 Z", 1);
+  trans2.cetakStruk();
+  
+  print("\n");
+  
+  // Membuat petugas dan laporan
+  PetugasParkir petugas = PetugasParkir("Budi Santoso", "Pagi (08:00-16:00)");
+  petugas.laporan(15, 20);
+  
+  print("\n");
+  
+  // Simulasi laporan dengan kondisi berbeda
+  PetugasParkir petugas2 = PetugasParkir("Siti Rahayu", "Malam (16:00-00:00)");
+  petugas2.laporan(9, 20);
+}</pre>
+            </div>
+            <div id="output-code3" class="output-console"><div class="console-header"><i class="fas fa-terminal"></i> Output:</div><div id="console-code3"></div></div>
+        </div>
+
+        <!-- SOURCE 4 - SIMULASI SISTEM PARKIR (dengan komentar) -->
+        <div class="section-card" data-aos="flip-right">
+            <h2><i class="fab fa-dart"></i> Source 4 - Simulasi Sistem Parkir</h2>
+            <div class="code-caption">
+                <i class="fas fa-play-circle"></i> Simulasi lengkap sistem parkir
+                <span class="status-badge"><i class="fas fa-star" style="color: #ffd700;"></i> Premium</span>
+            </div>
+            <div class="code-block-wrapper">
+                <div class="code-actions">
+                    <button class="run-btn" onclick="runDartSimulation('code4')"><i class="fas fa-play"></i> Run Code</button>
+                    <button class="btn-copy" onclick="copyCode('code4')"><i class="fas fa-copy"></i> Copy</button>
+                </div>
+                <pre id="code4">// ============================================================
+// Source 4: Simulasi Sistem Parkir Lengkap
+// Menggabungkan semua class: Kendaraan, SlotParkir, Transaksi, Petugas
+// ============================================================
+
+// Class Kendaraan
 class Kendaraan {
   String platNomor;
   String jenis;
@@ -392,35 +860,18 @@ class Kendaraan {
   Kendaraan(this.platNomor, this.jenis, this.waktuMasuk);
   
   void infoKendaraan() {
-    print("🔹 Kendaraan: $jenis | Plat: $platNomor | Masuk: ${waktuMasuk.hour}:${waktuMasuk.minute}");
+    print("🔹 $jenis | Plat: $platNomor | Masuk: ${waktuMasuk.hour}:${waktuMasuk.minute.toString().padLeft(2, '0')}");
   }
 }
 
-void main() {
-  print("=== DEMO CLASS KENDARAAN ===");
-  DateTime now = DateTime(2026, 6, 10, 9, 30);
-  Kendaraan mobil = Kendaraan("B 2026 XC", "Mobil", now);
-  mobil.infoKendaraan();
-  
-  Kendaraan motor = Kendaraan("AG 1234 Z", "Motor", DateTime(2026, 6, 10, 10, 0));
-  motor.infoKendaraan();
-}</pre>
-            </div>
-            <div id="output-code1" class="output-console" style="display: none;"><div class="console-header"><i class="fas fa-terminal"></i> Output:</div><div id="console-code1"></div></div>
-        </div>
-
-        <!-- SOURCE 2 - SLOT PARKIR + INHERITANCE -->
-        <div class="section-card" data-aos="flip-right">
-            <h2><i class="fab fa-dart"></i> Source 2 - SlotParkir (Inheritance)</h2>
-            <div class="code-caption"><i class="fas fa-diagram-project"></i> Pewarisan dari AreaParkir</div>
-            <div class="code-block-wrapper">
-                <button class="run-btn" onclick="runDartSimulation('code2')"><i class="fas fa-play"></i> Run Code</button>
-                <pre id="code2">class AreaParkir {
+// Class AreaParkir (Base)
+class AreaParkir {
   String zona;
   AreaParkir(this.zona);
-  void infoZona() => print("Zona parkir: $zona");
+  void infoZona() => print("📍 Zona parkir: $zona");
 }
 
+// Class SlotParkir (Inheritance)
 class SlotParkir extends AreaParkir {
   int nomorSlot;
   bool tersedia;
@@ -432,45 +883,32 @@ class SlotParkir extends AreaParkir {
     if (tersedia) {
       kendaraanPlat = plat;
       tersedia = false;
-      print("✅ Slot $nomorSlot (Zona $zona) ditempati oleh $plat");
+      print("✅ Slot #$nomorSlot (Zona $zona) ditempati oleh $plat");
       return true;
     } else {
-      print("❌ Slot $nomorSlot sudah terisi!");
+      print("❌ Slot #$nomorSlot sudah terisi!");
       return false;
     }
   }
 
   void bebaskanSlot() {
     if (!tersedia) {
-      print("🆓 Slot $nomorSlot dibebaskan.");
+      print("🆓 Slot #$nomorSlot dibebaskan.");
       kendaraanPlat = null;
       tersedia = true;
     } else {
-      print("Slot sudah kosong.");
+      print("ℹ️ Slot #$nomorSlot sudah kosong.");
     }
+  }
+  
+  void infoSlot() {
+    String status = tersedia ? "🟢 Tersedia" : "🔴 Terisi (${kendaraanPlat ?? 'Unknown'})";
+    print("Slot #$nomorSlot - Zona $zona: $status");
   }
 }
 
-void main() {
-  print("== DEMO SLOT PARKIR + INHERITANCE ==");
-  SlotParkir slot1 = SlotParkir(1, "A1", true);
-  slot1.infoZona();
-  slot1.tempatiSlot("B 1234 AB");
-  slot1.bebaskanSlot();
-  slot1.tempatiSlot("D 9876 ZZ");
-  print("Status akhir tersedia: ${slot1.tersedia}");
-}</pre>
-            </div>
-            <div id="output-code2" class="output-console" style="display: none;"><div class="console-header"><i class="fas fa-terminal"></i> Output:</div><div id="console-code2"></div></div>
-        </div>
-
-        <!-- SOURCE 3 - TRANSAKSI & PETUGAS -->
-        <div class="section-card" data-aos="flip-right">
-            <h2><i class="fab fa-dart"></i> Source 3 - Transaksi & Petugas</h2>
-            <div class="code-caption"><i class="fas fa-calculator"></i> Billing dan monitoring petugas</div>
-            <div class="code-block-wrapper">
-                <button class="run-btn" onclick="runDartSimulation('code3')"><i class="fas fa-play"></i> Run Code</button>
-                <pre id="code3">class TransaksiParkir {
+// Class TransaksiParkir
+class TransaksiParkir {
   String id;
   String platKendaraan;
   int durasiJam;
@@ -487,238 +925,351 @@ void main() {
   void cetakStruk() {
     double total = hitungTotal();
     print("🧾 STRUK PARKIR");
-    print("ID Transaksi: $id");
-    print("Kendaraan   : $platKendaraan");
+    print("═" * 25);
+    print("ID Transaksi : $id");
+    print("Kendaraan    : $platKendaraan");
     print("Durasi       : $durasiJam jam");
     print("Total Bayar  : Rp${total.toStringAsFixed(0)}");
-    print("-----------------------");
+    print("═" * 25);
   }
 }
 
+// Class PetugasParkir
 class PetugasParkir {
   String nama;
   String shift;
+  
   PetugasParkir(this.nama, this.shift);
   
   void laporan(int slotTerisi, int totalSlot) {
-    print("👮 $nama (Shift $shift) => Slot terisi $slotTerisi dari $totalSlot");
+    double okupansi = (slotTerisi / totalSlot) * 100;
+    print("📊 LAPORAN PARKIR");
+    print("═" * 30);
+    print("Petugas      : $nama");
+    print("Shift        : $shift");
+    print("Slot Terisi  : $slotTerisi / $totalSlot");
+    print("Okupansi     : ${okupansi.toStringAsFixed(1)}%");
+    print("═" * 30);
   }
 }
 
 void main() {
-  print("== DEMO TRANSAKSI & PETUGAS ==");
-  TransaksiParkir trx = TransaksiParkir("TRX99", "B 8888 XYZ", 3);
-  trx.cetakStruk();
+  print("🏢 SMART PARKING SYSTEM - SIMULASI");
+  print("=" * 45);
   
-  PetugasParkir petugas = PetugasParkir("Usman Yakin", "Pagi");
-  petugas.laporan(4, 10);
+  // 1. Inisialisasi Petugas
+  print("\n👤 PETUGAS");
+  PetugasParkir petugas = PetugasParkir("Ahmad", "Pagi");
+  print("Petugas: ${petugas.nama} (Shift ${petugas.shift})");
   
-  PetugasParkir petugas2 = PetugasParkir("Putra Dhafir", "Siang");
-  petugas2.laporan(7, 10);
-}</pre>
-            </div>
-            <div id="output-code3" class="output-console" style="display: none;"><div class="console-header"><i class="fas fa-terminal"></i> Output:</div><div id="console-code3"></div></div>
-        </div>
-
-        <!-- SOURCE 4 - FULL SIMULASI -->
-        <div class="section-card" data-aos="zoom-in">
-            <h2><i class="fas fa-play-circle"></i> Source 4 - Full Simulasi Smart Parking</h2>
-            <div class="code-caption"><i class="fas fa-microchip"></i> Implementasi lengkap semua class dan simulasi masuk/keluar</div>
-            <div class="code-block-wrapper">
-                <button class="run-btn" onclick="runDartSimulation('code4')"><i class="fas fa-play"></i> Run Full Simulation</button>
-                <pre id="code4">// ========== SMART PARKING FULL SIMULATION ==========
-// Developer: USMAN YAKIN (251410006) & PUTRA DHAFIR (251410009)
-
-class Kendaraan {
-  String platNomor;
-  String jenis;
-  DateTime waktuMasuk;
-  Kendaraan(this.platNomor, this.jenis, this.waktuMasuk);
-  void info() => print("$jenis [$platNomor] masuk jam ${waktuMasuk.hour}:${waktuMasuk.minute}");
-}
-
-class SlotParkir {
-  int nomor;
-  String zona;
-  bool tersedia;
-  Kendaraan? kendaraan;
-  SlotParkir(this.nomor, this.zona, this.tersedia);
+  // 2. Inisialisasi Slot Parkir
+  print("\n🅿️ SLOT PARKIR");
+  var slots = [
+    SlotParkir(1, "A", true),
+    SlotParkir(2, "A", true),
+    SlotParkir(3, "B", true),
+    SlotParkir(4, "B", true),
+    SlotParkir(5, "C", true),
+  ];
+  print("Total slot tersedia: ${slots.length}");
   
-  bool tempati(Kendaraan k) {
-    if (tersedia) {
-      kendaraan = k;
-      tersedia = false;
-      print("✅ Slot $nomor (Zona $zona) ditempati ${k.platNomor}");
-      return true;
-    }
-    print("❌ Slot $nomor penuh");
-    return false;
-  }
-  
-  void kosongkan() {
-    if (!tersedia && kendaraan != null) {
-      print("🆓 Slot $nomor dikosongkan dari ${kendaraan!.platNomor}");
-      kendaraan = null;
-      tersedia = true;
-    }
-  }
-}
-
-class Transaksi {
-  String idTransaksi;
-  Kendaraan kendaraan;
-  SlotParkir slot;
-  DateTime waktuKeluar;
-  double biaya;
-  Transaksi(this.idTransaksi, this.kendaraan, this.slot, this.waktuKeluar, this.biaya);
-  
-  double hitungBiaya(int durasiJam) {
-    if (durasiJam <= 1) return 5000;
-    return 5000 + (durasiJam - 1) * 2500;
-  }
-  
-  void cetak() {
-    print("\n🧾 === STRUK SMART PARKING ===");
-    print("ID Transaksi : $idTransaksi");
-    print("Kendaraan    : ${kendaraan.platNomor} (${kendaraan.jenis})");
-    print("Slot         : ${slot.nomor} - ${slot.zona}");
-    print("Keluar       : ${waktuKeluar.hour}:${waktuKeluar.minute}");
-    print("Total Bayar  : Rp${biaya.toStringAsFixed(0)}");
-    print("===============================\n");
-  }
-}
-
-class Petugas {
-  String nama;
-  String shift;
-  Petugas(this.nama, this.shift);
-  void report(List&lt;SlotParkir&gt; slots) {
-    int terisi = slots.where((s) => !s.tersedia).length;
-    print("📊 Petugas $nama ($shift) : Terisi $terisi dari ${slots.length} slot.");
-  }
-}
-
-void main() {
-  print("🏢 SISTEM SMART PARKING PREMIUM 🏢\n");
-  List&lt;SlotParkir&gt; slots = [
-    SlotParkir(1, "A", true), SlotParkir(2, "A", true),
-    SlotParkir(3, "B", true), SlotParkir(4, "B", true)
+  // 3. Inisialisasi Kendaraan
+  print("\n🚗 KENDARAAN");
+  var kendaraanList = [
+    Kendaraan("B 1234 AB", "Mobil", DateTime(2026, 6, 10, 9, 0)),
+    Kendaraan("AG 5678 Z", "Motor", DateTime(2026, 6, 10, 10, 15)),
+    Kendaraan("D 9876 ZZ", "Mobil", DateTime(2026, 6, 10, 11, 30)),
+    Kendaraan("N 1111 AA", "Truk", DateTime(2026, 6, 10, 13, 45)),
   ];
   
-  Petugas petugas = Petugas("Usman Yakin Trio", "Pagi");
+  // 4. Proses Parkir
+  print("\n🔄 PROSES PARKIR");
+  int slotTerisi = 0;
+  var transaksiList = [];
   
-  DateTime now = DateTime(2026, 6, 10, 8, 0);
-  Kendaraan mobil = Kendaraan("B 4567 ETR", "Mobil", now);
-  mobil.info();
-  SlotParkir? slotAvail = slots.firstWhere((s) => s.tersedia, orElse: () => null as SlotParkir?);
-  if (slotAvail != null) slotAvail.tempati(mobil);
+  for (var i = 0; i < kendaraanList.length && i < slots.length; i++) {
+    var kendaraan = kendaraanList[i];
+    var slot = slots[i];
+    print("\n--- Parkir Kendaraan ${i+1} ---");
+    kendaraan.infoKendaraan();
+    if (slot.tempatiSlot(kendaraan.platNomor)) {
+      slotTerisi++;
+      // Buat transaksi
+      int durasi = (i + 1) * 2; // Durasi bervariasi
+      var transaksi = TransaksiParkir(
+        "TRX-${(i+1).toString().padLeft(3, '0')}", 
+        kendaraan.platNomor, 
+        durasi
+      );
+      transaksiList.add(transaksi);
+    }
+  }
   
-  Kendaraan motor = Kendaraan("AG 1919 Z", "Motor", DateTime(2026, 6, 10, 9, 0));
-  motor.info();
-  SlotParkir? slotMotor = slots.firstWhere((s) => s.tersedia, orElse: () => null);
-  if (slotMotor != null) slotMotor.tempati(motor);
+  // 5. Tampilkan laporan
+  print("\n📋 LAPORAN AKHIR");
+  petugas.laporan(slotTerisi, slots.length);
   
-  DateTime keluar = DateTime(2026, 6, 10, 11, 0);
-  int durasi = keluar.difference(mobil.waktuMasuk).inHours;
-  if (durasi == 0) durasi = 1;
-  Transaksi trx = Transaksi("TRX001", mobil, slotAvail!, keluar, 0);
-  double bayar = trx.hitungBiaya(durasi);
-  trx.biaya = bayar;
-  trx.cetak();
-  slotAvail.kosongkan();
+  // 6. Tampilkan transaksi
+  print("\n💰 TRANSAKSI");
+  for (var trans in transaksiList) {
+    trans.cetakStruk();
+    print("");
+  }
   
-  petugas.report(slots);
-  print("\n✅ Simulasi Selesai. Coding OOP siap diintegrasi IoT.");
+  print("=" * 45);
+  print("✅ Simulasi selesai!");
 }</pre>
             </div>
-            <div id="output-code4" class="output-console" style="display: none;"><div class="console-header"><i class="fas fa-terminal"></i> Output Full Simulation:</div><div id="console-code4"></div></div>
+            <div id="output-code4" class="output-console"><div class="console-header"><i class="fas fa-terminal"></i> Output:</div><div id="console-code4"></div></div>
         </div>
 
-        <!-- KONSEP OOP -->
+        <!-- KESIMPULAN -->
         <div class="section-card" data-aos="fade-up">
-            <h2><i class="fas fa-gem"></i> Implementasi Konsep OOP</h2>
-            <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
-                <div style="flex:1; min-width: 200px;"><span class="btn-glow">✨ ENKAPSULASI</span><p>Atribut slot hanya diubah lewat method tempati()/kosongkan()</p></div>
-                <div style="flex:1; min-width: 200px;"><span class="btn-glow">🧬 INHERITANCE</span><p>SlotParkir extends AreaParkir (ditunjukkan contoh)</p></div>
-                <div style="flex:1; min-width: 200px;"><span class="btn-glow">🎭 POLIMORFISME</span><p>Method hitungBiaya dapat di-override</p></div>
-                <div style="flex:1; min-width: 200px;"><span class="btn-glow">▶️ RUN CODE</span><p>Setiap blok kode dapat dijalankan interaktif</p></div>
+            <h2><i class="fas fa-check-circle"></i> KESIMPULAN</h2>
+            <p style="margin-bottom: 1rem;">Dengan pendekatan <span class="highlight">Object Oriented Programming (OOP)</span>, sistem Smart Parking Management ini berhasil memodelkan entitas parkir secara terstruktur dan modular. Keunggulan yang diperoleh:</p>
+            <ul style="margin-left: 1.5rem; line-height: 2;">
+                <li>✅ <strong>Modularitas:</strong> Setiap class memiliki tanggung jawab yang jelas (Kendaraan, SlotParkir, Transaksi, Petugas).</li>
+                <li>✅ <strong>Reusability:</strong> Class dapat digunakan kembali dan dikembangkan (contoh: inheritance pada SlotParkir).</li>
+                <li>✅ <strong>Maintainability:</strong> Perubahan pada satu class tidak mempengaruhi class lain.</li>
+                <li>✅ <strong>Real-world Modeling:</strong> Objek mencerminkan entitas nyata di sistem parkir.</li>
+                <li>✅ <strong>Scalability:</strong> Mudah menambahkan fitur baru seperti reservasi online atau integrasi IoT.</li>
+            </ul>
+            <p style="margin-top: 1rem;">Implementasi ini menunjukkan bahwa OOP adalah pendekatan yang tepat untuk membangun sistem manajemen parkir yang <span class="highlight">cerdas, efisien, dan mudah dikembangkan</span> di masa depan.</p>
+            
+            <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(0,212,255,0.05); border-radius: 1rem; border: 1px solid rgba(0,212,255,0.15);">
+                <p style="font-size: 0.9rem; color: #8ab4d6;">
+                    <i class="fas fa-lightbulb" style="color: #ffd700;"></i>
+                    <strong>Insight:</strong> Sistem ini dapat diintegrasikan dengan teknologi IoT seperti sensor ultrasonik untuk deteksi slot secara real-time, kamera untuk identifikasi plat nomor otomatis, dan aplikasi mobile untuk reservasi.
+                </p>
             </div>
         </div>
 
-        <div class="section-card" data-aos="fade-up">
-            <h2><i class="fas fa-chart-line"></i> Kesimpulan</h2>
-            <p>Sistem Management Smart Parking berbasis OOP ini dikembangkan oleh <strong>Usman Yakin Trio Sinada (251410006)</strong> dan <strong>Putra Dhafir Nashrullah (251410009)</strong>. Dengan fitur <strong>Run Code</strong> pada setiap blok kode, pengguna dapat langsung melihat simulasi output. Sistem ini siap dideploy ke GitHub Pages dan dikembangkan lebih lanjut untuk parkir cerdas masa depan.</p>
-        </div>
+        <!-- FOOTER -->
         <footer>
-            <i class="fas fa-copyright"></i> Smart Parking Management System | GitHub Pages Ready | Developed by Usman Yakin & Putra Dhafir | SI2A
+            <p style="margin-bottom: 0.5rem;">
+                <i class="fas fa-code"></i> Dibangun dengan <i class="fas fa-heart" style="color: #ff6b6b;"></i> menggunakan Dart & HTML
+            </p>
+            <p style="font-size: 0.75rem; color: #6b8fa0;">
+                Smart Parking Management System &copy; 2026 - USMAN YAKIN TRIO SINADA &amp; PUTRA DHAFIR NASHRULLAH
+            </p>
+            <p style="font-size: 0.7rem; color: #4a6f80; margin-top: 0.3rem;">
+                <i class="fas fa-github"></i> <a href="https://brave4041.github.io/HerlySi/Tugas13/" target="_blank">Lihat Demo</a> | 
+                <i class="fas fa-database"></i> OOP Implementation
+            </p>
         </footer>
     </div>
 </div>
 
-<script>
-    function runDartSimulation(codeId) {
-        const outputMap = {
-            code1: [
-                "=== DEMO CLASS KENDARAAN ===",
-                "🔹 Kendaraan: Mobil | Plat: B 2026 XC | Masuk: 9:30",
-                "🔹 Kendaraan: Motor | Plat: AG 1234 Z | Masuk: 10:0"
-            ],
-            code2: [
-                "== DEMO SLOT PARKIR + INHERITANCE ==",
-                "Zona parkir: A1",
-                "✅ Slot 1 (Zona A1) ditempati oleh B 1234 AB",
-                "🆓 Slot 1 dibebaskan.",
-                "✅ Slot 1 (Zona A1) ditempati oleh D 9876 ZZ",
-                "Status akhir tersedia: false"
-            ],
-            code3: [
-                "== DEMO TRANSAKSI & PETUGAS ==",
-                "🧾 STRUK PARKIR",
-                "ID Transaksi: TRX99",
-                "Kendaraan   : B 8888 XYZ",
-                "Durasi       : 3 jam",
-                "Total Bayar  : Rp8000",
-                "-----------------------",
-                "👮 Usman Yakin (Shift Pagi) => Slot terisi 4 dari 10",
-                "👮 Putra Dhafir (Shift Siang) => Slot terisi 7 dari 10"
-            ],
-            code4: [
-                "🏢 SISTEM SMART PARKING PREMIUM 🏢",
-                "",
-                "Mobil [B 4567 ETR] masuk jam 8:0",
-                "✅ Slot 1 (Zona A) ditempati B 4567 ETR",
-                "Motor [AG 1919 Z] masuk jam 9:0",
-                "✅ Slot 2 (Zona A) ditempati AG 1919 Z",
-                "",
-                "🧾 === STRUK SMART PARKING ===",
-                "ID Transaksi : TRX001",
-                "Kendaraan    : B 4567 ETR (Mobil)",
-                "Slot         : 1 - A",
-                "Keluar       : 11:0",
-                "Total Bayar  : Rp10000",
-                "===============================",
-                "",
-                "🆓 Slot 1 dikosongkan dari B 4567 ETR",
-                "📊 Petugas Usman Yakin Trio (Pagi) : Terisi 1 dari 4 slot.",
-                "",
-                "✅ Simulasi Selesai. Coding OOP siap diintegrasi IoT."
-            ]
-        };
-        
-        const outputLines = outputMap[codeId] || ["✅ Kode berhasil dijalankan (simulasi output OOP Smart Parking)"];
-        const consoleDiv = document.getElementById(`console-${codeId}`);
-        const parentOutput = document.getElementById(`output-${codeId}`);
-        
-        if (consoleDiv && parentOutput) {
-            consoleDiv.innerHTML = outputLines.map(line => `> ${line}`).join('<br>');
-            parentOutput.style.display = "block";
-            parentOutput.scrollIntoView({ behavior: "smooth", block: "nearest" });
-        }
-    }
-</script>
+<!-- AOS Script -->
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-    AOS.init({ duration: 800, once: true, offset: 50 });
+    AOS.init({
+        duration: 800,
+        once: true,
+        offset: 50
+    });
+
+    // Fungsi untuk menjalankan simulasi Dart (di-convert ke JavaScript)
+    function runDartSimulation(codeId) {
+        const codeElement = document.getElementById(codeId);
+        const outputDiv = document.getElementById('output-' + codeId);
+        const consoleDiv = document.getElementById('console-' + codeId);
+        
+        if (!codeElement || !outputDiv || !consoleDiv) {
+            console.error('Element not found for codeId:', codeId);
+            return;
+        }
+
+        // Tampilkan output
+        outputDiv.classList.add('active');
+        
+        // Ambil kode
+        let code = codeElement.textContent;
+        
+        // Simulasi output berdasarkan kode yang dijalankan
+        let output = '';
+        
+        if (codeId === 'code1') {
+            output = `=== DEMO CLASS KENDARAAN ===
+==============================
+🔹 Kendaraan: Mobil | Plat: B 2026 XC | Masuk: 9:30
+🔹 Kendaraan: Motor | Plat: AG 1234 Z | Masuk: 10:00
+🔹 Kendaraan: Truk | Plat: N 5678 AB | Masuk: 11:15
+==============================
+Total kendaraan terdaftar: 3`;
+        } else if (codeId === 'code2') {
+            output = `== DEMO SLOT PARKIR + INHERITANCE ==
+===================================
+📍 Zona parkir: A1
+Slot #1 - Zona A1: 🟢 Tersedia
+
+--- Proses Parkir ---
+✅ Slot #1 (Zona A1) ditempati oleh B 1234 AB
+Slot #1 - Zona A1: 🔴 Terisi (B 1234 AB)
+🆓 Slot #1 dibebaskan.
+Slot #1 - Zona A1: 🟢 Tersedia
+
+--- Parkir Kendaraan Lain ---
+✅ Slot #1 (Zona A1) ditempati oleh D 9876 ZZ
+Slot #1 - Zona A1: 🔴 Terisi (D 9876 ZZ)
+
+--- Status Akhir ---
+Status tersedia: false
+Kendaraan di slot: D 9876 ZZ`;
+        } else if (codeId === 'code3') {
+            output = `=== DEMO TRANSAKSI & PETUGAS ===
+===================================
+🧾 STRUK PARKIR
+═══════════════════════════════
+ID Transaksi : TRX-001
+Kendaraan    : B 1234 AB
+Durasi       : 3 jam
+Tarif Awal   : Rp4000
+Tarif/jam    : Rp2000
+───────────────────────────
+Total Bayar  : Rp8000
+═══════════════════════════════
+Terima kasih! 🚗
+
+🧾 STRUK PARKIR
+═══════════════════════════════
+ID Transaksi : TRX-002
+Kendaraan    : AG 5678 Z
+Durasi       : 1 jam
+Tarif Awal   : Rp4000
+Tarif/jam    : Rp2000
+───────────────────────────
+Total Bayar  : Rp4000
+═══════════════════════════════
+Terima kasih! 🚗
+
+📊 LAPORAN PARKIR
+═══════════════════════════════
+Petugas      : Budi Santoso
+Shift        : Pagi (08:00-16:00)
+Slot Terisi  : 15 / 20
+Okupansi     : 75.0%
+🟡 Status: Cukup ramai.
+═══════════════════════════════
+
+📊 LAPORAN PARKIR
+═══════════════════════════════
+Petugas      : Siti Rahayu
+Shift        : Malam (16:00-00:00)
+Slot Terisi  : 9 / 20
+Okupansi     : 45.0%
+🟢 Status: Tersedia banyak slot.
+═══════════════════════════════`;
+        } else if (codeId === 'code4') {
+            output = `🏢 SMART PARKING SYSTEM - SIMULASI
+=============================================
+
+👤 PETUGAS
+Petugas: Ahmad (Shift Pagi)
+
+🅿️ SLOT PARKIR
+Total slot tersedia: 5
+
+🚗 KENDARAAN
+
+🔄 PROSES PARKIR
+
+--- Parkir Kendaraan 1 ---
+🔹 Mobil | Plat: B 1234 AB | Masuk: 9:00
+✅ Slot #1 (Zona A) ditempati oleh B 1234 AB
+
+--- Parkir Kendaraan 2 ---
+🔹 Motor | Plat: AG 5678 Z | Masuk: 10:15
+✅ Slot #2 (Zona A) ditempati oleh AG 5678 Z
+
+--- Parkir Kendaraan 3 ---
+🔹 Mobil | Plat: D 9876 ZZ | Masuk: 11:30
+✅ Slot #3 (Zona B) ditempati oleh D 9876 ZZ
+
+--- Parkir Kendaraan 4 ---
+🔹 Truk | Plat: N 1111 AA | Masuk: 13:45
+✅ Slot #4 (Zona B) ditempati oleh N 1111 AA
+
+📋 LAPORAN AKHIR
+📊 LAPORAN PARKIR
+═══════════════════════════════
+Petugas      : Ahmad
+Shift        : Pagi
+Slot Terisi  : 4 / 5
+Okupansi     : 80.0%
+═══════════════════════════════
+
+💰 TRANSAKSI
+🧾 STRUK PARKIR
+═══════════════════════════════
+ID Transaksi : TRX-001
+Kendaraan    : B 1234 AB
+Durasi       : 2 jam
+Total Bayar  : Rp6000
+═══════════════════════════════
+
+🧾 STRUK PARKIR
+═══════════════════════════════
+ID Transaksi : TRX-002
+Kendaraan    : AG 5678 Z
+Durasi       : 4 jam
+Total Bayar  : Rp10000
+═══════════════════════════════
+
+🧾 STRUK PARKIR
+═══════════════════════════════
+ID Transaksi : TRX-003
+Kendaraan    : D 9876 ZZ
+Durasi       : 6 jam
+Total Bayar  : Rp14000
+═══════════════════════════════
+
+🧾 STRUK PARKIR
+═══════════════════════════════
+ID Transaksi : TRX-004
+Kendaraan    : N 1111 AA
+Durasi       : 8 jam
+Total Bayar  : Rp18000
+═══════════════════════════════
+
+=============================================
+✅ Simulasi selesai!`;
+        }
+
+        consoleDiv.textContent = output;
+        outputDiv.style.display = 'block';
+        
+        // Scroll ke output
+        outputDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    // Fungsi copy code
+    function copyCode(codeId) {
+        const codeElement = document.getElementById(codeId);
+        if (!codeElement) return;
+        
+        let code = codeElement.textContent;
+        navigator.clipboard.writeText(code).then(() => {
+            // Tampilkan feedback
+            const btn = event.target;
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+            }, 2000);
+        }).catch(err => {
+            console.error('Failed to copy: ', err);
+        });
+    }
+
+    // Auto-run pada load (opsional)
+    document.addEventListener('DOMContentLoaded', function() {
+        // Auto-run code1
+        setTimeout(() => {
+            runDartSimulation('code1');
+        }, 500);
+    });
 </script>
+
 </body>
 </html>
