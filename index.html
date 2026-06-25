@@ -266,59 +266,158 @@
             transform: scale(0.98);
         }
 
-        pre {
-            background: #05161f;
+        /* DartPad Container */
+        .dartpad-wrapper {
+            margin: 1rem 0;
             border-radius: 1.5rem;
-            padding: 1.2rem;
-            overflow-x: auto;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.82rem;
+            overflow: hidden;
             border: 1px solid #1f6e8c;
-            box-shadow: inset 0 0 8px rgba(0,0,0,0.5);
-            color: #d6f0ff;
-            margin: 0;
-            line-height: 1.6;
-            max-height: 500px;
-            overflow-y: auto;
+            background: #05161f;
+            transition: all 0.3s ease;
         }
 
-        .output-console {
-            background: #02101b;
-            border-radius: 1rem;
-            padding: 0.8rem 1.2rem;
-            margin-top: 1rem;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.8rem;
-            border-left: 4px solid #00d4ff;
-            color: #bbf0ff;
-            white-space: pre-wrap;
-            word-break: break-word;
-            max-height: 400px;
-            overflow-y: auto;
-            display: none;
+        .dartpad-wrapper:hover {
+            border-color: #00d4ff;
+            box-shadow: 0 0 25px rgba(0, 212, 255, 0.15);
         }
 
-        .output-console.active {
+        .dartpad-wrapper iframe {
+            width: 100%;
+            height: 650px;
+            border: none;
             display: block;
+            background: #05161f;
         }
 
-        .code-caption {
-            font-size: 0.8rem;
-            font-weight: 500;
-            margin-bottom: 0.5rem;
+        .dartpad-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 1.2rem;
+            background: rgba(0, 20, 30, 0.8);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .dartpad-header span {
             color: #78c8ff;
+            font-size: 0.8rem;
+            font-family: 'Fira Code', monospace;
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
-        .btn-glow {
-            display: inline-block;
+        .dartpad-header .badge-dart {
+            background: rgba(0, 212, 255, 0.15);
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            color: #00d4ff;
+            font-weight: 600;
+        }
+
+        .btn-dartpad {
             background: linear-gradient(95deg, #0077b6, #00b4d8);
-            padding: 0.2rem 1rem;
-            border-radius: 30px;
+            border: none;
+            color: white;
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+            font-family: monospace;
+        }
+
+        .btn-dartpad:hover {
+            background: linear-gradient(95deg, #00b4d8, #00d4ff);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
+            transform: scale(1.02);
+        }
+
+        .btn-copy {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #8ab4d6;
+            padding: 4px 12px;
+            border-radius: 20px;
             font-size: 0.7rem;
-            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: monospace;
+        }
+
+        .btn-copy:hover {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+        }
+
+        .code-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            background: rgba(0, 212, 255, 0.15);
+            color: #00d4ff;
+            margin-left: 8px;
+        }
+
+        .merged-code-section {
+            background: rgba(0, 212, 255, 0.05);
+            border: 2px solid rgba(0, 212, 255, 0.4);
+            border-radius: 2rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.15);
+        }
+
+        .merged-code-section h2 {
+            background: linear-gradient(120deg, #ffffff, #7ee0ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .feature-item {
+            background: rgba(0, 212, 255, 0.05);
+            padding: 0.8rem 1rem;
+            border-radius: 1rem;
+            border: 1px solid rgba(0, 212, 255, 0.15);
+            text-align: center;
+        }
+
+        .feature-item i {
+            font-size: 1.5rem;
+            color: #00d4ff;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .feature-item span {
+            font-size: 0.85rem;
+            font-weight: 500;
         }
 
         .diagram-container {
@@ -331,6 +430,11 @@
 
         .diagram-container mermaid {
             background: transparent;
+        }
+
+        .highlight {
+            color: #7ee0ff;
+            font-weight: 600;
         }
 
         footer {
@@ -367,10 +471,6 @@
                 padding: 10px;
                 font-size: 1.4rem;
             }
-            .run-btn {
-                width: 100%;
-                justify-content: center;
-            }
             .section-card {
                 padding: 1rem 1.2rem;
             }
@@ -384,130 +484,12 @@
                 flex-direction: column;
                 gap: 0.8rem;
             }
-            pre {
-                max-height: 400px;
+            .dartpad-wrapper iframe {
+                height: 500px;
             }
-        }
-
-        .console-header {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #62d2ff;
-        }
-        hr {
-            border-color: #1e5875;
-            margin: 1rem 0;
-        }
-        .highlight {
-            color: #7ee0ff;
-            font-weight: 600;
-        }
-        .text-muted {
-            color: #8ab4d6;
-            font-size: 0.9rem;
-        }
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin: 1rem 0;
-        }
-        .feature-item {
-            background: rgba(0, 212, 255, 0.05);
-            padding: 0.8rem 1rem;
-            border-radius: 1rem;
-            border: 1px solid rgba(0, 212, 255, 0.15);
-            text-align: center;
-        }
-        .feature-item i {
-            font-size: 1.5rem;
-            color: #00d4ff;
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-        .feature-item span {
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-        .btn-copy {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            color: #8ab4d6;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-family: monospace;
-            margin-left: 8px;
-        }
-        .btn-copy:hover {
-            background: rgba(255,255,255,0.1);
-            color: #fff;
-        }
-        .code-actions {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-        .status-badge {
-            display: inline-block;
-            padding: 2px 12px;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            background: rgba(0, 212, 255, 0.15);
-            color: #00d4ff;
-            margin-left: 8px;
-        }
-
-        .merged-code-section {
-            background: rgba(0, 212, 255, 0.05);
-            border: 2px solid rgba(0, 212, 255, 0.4);
-            border-radius: 2rem;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 0 30px rgba(0, 212, 255, 0.15);
-        }
-
-        .merged-code-section h2 {
-            background: linear-gradient(120deg, #ffffff, #7ee0ff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .merged-code-section .run-btn {
-            background: linear-gradient(95deg, #00b4d8, #0077b6);
-            font-size: 0.9rem;
-            padding: 10px 24px;
-        }
-
-        .merged-code-section .run-btn:hover {
-            background: linear-gradient(95deg, #00d4ff, #0096c7);
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
-        }
-        
-        /* Style untuk DartPad iframe */
-        .dartpad-container {
-            position: relative;
-            width: 100%;
-            height: 550px;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid rgba(0, 212, 255, 0.3);
-            background: #05161f;
-        }
-        
-        .dartpad-container iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            background: #05161f;
+            .merged-code-section {
+                padding: 1rem;
+            }
         }
     </style>
 </head>
@@ -517,19 +499,19 @@
         <h1>
             <i class="fas fa-parking"></i> 
             Smart Parking Management System
-            <span class="badge-smart"><i class="fas fa-microchip"></i> OOP + Run Code</span>
+            <span class="badge-smart"><i class="fas fa-microchip"></i> OOP + DartPad</span>
         </h1>
         <div class="subtitle">
             <div class="author-group">
                 <div class="author-card"><i class="fas fa-user-astronaut"></i> USMAN YAKIN TRIO SINADA | 251410006</div>
                 <div class="author-card"><i class="fas fa-user-ninja"></i> PUTRA DHAFIR NASHRULLAH | 251410009</div>
             </div>
-            <div class="badge-smart"><i class="fas fa-chalkboard-user"></i> Kelas: SI2A · Klik ▶️ Run untuk menjalankan</div>
+            <div class="badge-smart"><i class="fas fa-play-circle"></i> Run langsung di DartPad di bawah</div>
         </div>
     </div>
 
     <div class="content">
-        <!-- LATAR BELAKANG & PENJELASAN PENGGUNAAN APLIKASI -->
+        <!-- LATAR BELAKANG & PENJELASAN -->
         <div class="section-card" data-aos="fade-right">
             <h2><i class="fas fa-car-side"></i> LATAR BELAKANG & PENGGUNAAN APLIKASI</h2>
             <p style="margin-bottom: 0.6rem;">Kepadatan kendaraan dan kurangnya sistem parkir terintegrasi menjadi masalah utama di area perkotaan. <strong>Smart Parking Management</strong> hadir sebagai solusi cerdas menggunakan pendekatan <strong>Object Oriented Programming (OOP)</strong> untuk memodelkan kendaraan, slot parkir, transaksi, dan petugas secara real-time. Dengan OOP, sistem ini mudah dikembangkan, mendukung berbagai tipe kendaraan, dan memberikan transparansi ketersediaan slot.</p>
@@ -579,7 +561,7 @@ classDiagram
         +String? kendaraanPlat
         +tempatiSlot(plat)
         +bebaskanSlot()
-        +infoZona()
+        +infoSlot()
     }
     
     class TransaksiParkir {
@@ -619,343 +601,46 @@ classDiagram
             </div>
         </div>
 
-        <!-- SOURCE CODE GABUNGAN (SEMUA CLASS DALAM SATU FILE) -->
+        <!-- SOURCE CODE + DARTPAD -->
         <div class="merged-code-section" data-aos="flip-up">
-            <h2><i class="fab fa-dart"></i> Source Code Lengkap - Smart Parking System</h2>
-            <div class="code-caption">
-                <i class="fas fa-file-code"></i> Semua class digabung dalam satu file Dart
-                <span class="status-badge"><i class="fas fa-check-circle"></i> Complete</span>
+            <h2><i class="fab fa-dart"></i> Source Code & Output - Smart Parking System</h2>
+            
+            <div class="code-actions">
+                <button class="run-btn" onclick="runDartPad()">
+                    <i class="fas fa-play"></i> Jalankan di DartPad
+                </button>
+                <button class="btn-copy" onclick="copyCode()">
+                    <i class="fas fa-copy"></i> Copy Kode
+                </button>
+                <span class="status-badge"><i class="fas fa-check-circle"></i> Siap dijalankan</span>
             </div>
-            <p style="margin-bottom: 1rem; color: #8ab4d6;">
-                <i class="fas fa-info-circle"></i> Kode di bawah ini berisi seluruh class yang dibutuhkan: <strong>Kendaraan</strong>, <strong>AreaParkir</strong>, <strong>SlotParkir</strong>, <strong>TransaksiParkir</strong>, dan <strong>PetugasParkir</strong> beserta simulasi lengkapnya.
-            </p>
-            <div class="code-block-wrapper">
-                <div class="code-actions">
-                    <button class="run-btn" onclick="runDartSimulation('mergedCode')"><i class="fas fa-play"></i> Run Code</button>
-                    <button class="btn-copy" onclick="copyCode('mergedCode')"><i class="fas fa-copy"></i> Copy</button>
+
+            <!-- DARTPAD IFRAME -->
+            <div class="dartpad-wrapper">
+                <div class="dartpad-header">
+                    <span>
+                        <i class="fab fa-dart" style="color: #00d4ff;"></i> 
+                        DartPad - Smart Parking System
+                        <span class="badge-dart">OOP</span>
+                    </span>
+                    <a href="https://dartpad.dev/?id=70a8b270caa99a218fe2b8fefe9c20a6" target="_blank" class="btn-dartpad">
+                        <i class="fas fa-external-link-alt"></i> Buka Fullscreen
+                    </a>
                 </div>
-                <pre id="mergedCode">// ============================================================
-// SMART PARKING MANAGEMENT SYSTEM - OOP DART
-// ============================================================
-// Nama  : USMAN YAKIN TRIO SINADA (251410006)
-//         PUTRA DHAFIR NASHRULLAH (251410009)
-// Kelas : SI2A
-// ============================================================
-// Deskripsi:
-// Sistem manajemen parkir cerdas menggunakan pendekatan OOP.
-// Terdiri dari class Kendaraan, AreaParkir, SlotParkir,
-// TransaksiParkir, dan PetugasParkir.
-// ============================================================
-
-// ============================================================
-// CLASS 1: KENDARAAN
-// Merepresentasikan kendaraan yang akan parkir.
-// Properti:
-//   - platNomor : String (nomor polisi kendaraan)
-//   - jenis     : String (Mobil, Motor, Truk, dll)
-//   - waktuMasuk: DateTime (waktu kendaraan masuk parkir)
-// Method:
-//   - infoKendaraan() : menampilkan informasi kendaraan
-// ============================================================
-class Kendaraan {
-  String platNomor;
-  String jenis;
-  DateTime waktuMasuk;
-
-  // Constructor
-  Kendaraan(this.platNomor, this.jenis, this.waktuMasuk);
-  
-  // Method untuk menampilkan info kendaraan
-  void infoKendaraan() {
-    print("🔹 Kendaraan: $jenis | Plat: $platNomor | Masuk: ${waktuMasuk.hour}:${waktuMasuk.minute.toString().padLeft(2, '0')}");
-  }
-}
-
-// ============================================================
-// CLASS 2: AREA PARKIR (BASE CLASS)
-// Kelas dasar untuk zona parkir.
-// Properti:
-//   - zona: String (nama zona parkir, misal "A1", "B2")
-// Method:
-//   - infoZona() : menampilkan informasi zona
-// ============================================================
-class AreaParkir {
-  String zona;
-  
-  AreaParkir(this.zona);
-  
-  void infoZona() {
-    print("📍 Zona parkir: $zona");
-  }
-}
-
-// ============================================================
-// CLASS 3: SLOT PARKIR (INHERITANCE dari AreaParkir)
-// Merepresentasikan slot parkir individual.
-// Properti tambahan:
-//   - nomorSlot    : int (nomor identifikasi slot)
-//   - tersedia     : bool (status ketersediaan slot)
-//   - kendaraanPlat: String? (plat kendaraan yang menempati)
-// Method:
-//   - tempatiSlot(plat) : mengisi slot dengan kendaraan
-//   - bebaskanSlot()    : mengosongkan slot
-//   - infoSlot()        : menampilkan status slot
-// ============================================================
-class SlotParkir extends AreaParkir {
-  int nomorSlot;
-  bool tersedia;
-  String? kendaraanPlat;
-
-  SlotParkir(this.nomorSlot, String zona, this.tersedia) : super(zona);
-
-  // Method untuk menempati slot parkir
-  bool tempatiSlot(String plat) {
-    if (tersedia) {
-      kendaraanPlat = plat;
-      tersedia = false;
-      print("✅ Slot #$nomorSlot (Zona $zona) ditempati oleh $plat");
-      return true;
-    } else {
-      print("❌ Slot #$nomorSlot sudah terisi!");
-      return false;
-    }
-  }
-
-  // Method untuk membebaskan slot parkir
-  void bebaskanSlot() {
-    if (!tersedia) {
-      print("🆓 Slot #$nomorSlot dibebaskan.");
-      kendaraanPlat = null;
-      tersedia = true;
-    } else {
-      print("ℹ️ Slot #$nomorSlot sudah kosong.");
-    }
-  }
-  
-  // Method untuk menampilkan status slot
-  void infoSlot() {
-    String status = tersedia ? "🟢 Tersedia" : "🔴 Terisi (${kendaraanPlat ?? 'Unknown'})";
-    print("Slot #$nomorSlot - Zona $zona: $status");
-  }
-}
-
-// ============================================================
-// CLASS 4: TRANSAKSI PARKIR
-// Menangani perhitungan biaya dan pencetakan struk.
-// Properti:
-//   - id             : String (ID transaksi unik)
-//   - platKendaraan  : String (plat nomor kendaraan)
-//   - durasiJam      : int (lama parkir dalam jam)
-//   - tarifAwal      : double (tarif untuk 1 jam pertama)
-//   - tarifPerJam    : double (tarif untuk jam berikutnya)
-// Method:
-//   - hitungTotal()  : menghitung total biaya parkir
-//   - cetakStruk()   : mencetak struk pembayaran
-// ============================================================
-class TransaksiParkir {
-  String id;
-  String platKendaraan;
-  int durasiJam;
-  double tarifAwal = 4000;
-  double tarifPerJam = 2000;
-
-  TransaksiParkir(this.id, this.platKendaraan, this.durasiJam);
-  
-  // Menghitung total biaya berdasarkan durasi
-  double hitungTotal() {
-    if (durasiJam <= 1) return tarifAwal;
-    return tarifAwal + (durasiJam - 1) * tarifPerJam;
-  }
-
-  // Mencetak struk parkir
-  void cetakStruk() {
-    double total = hitungTotal();
-    print("🧾 STRUK PARKIR");
-    print("═" * 25);
-    print("ID Transaksi : $id");
-    print("Kendaraan    : $platKendaraan");
-    print("Durasi       : $durasiJam jam");
-    print("Tarif Awal   : Rp${tarifAwal.toStringAsFixed(0)}");
-    print("Tarif/jam    : Rp${tarifPerJam.toStringAsFixed(0)}");
-    print("─" * 25);
-    print("Total Bayar  : Rp${total.toStringAsFixed(0)}");
-    print("═" * 25);
-    print("Terima kasih! 🚗");
-  }
-}
-
-// ============================================================
-// CLASS 5: PETUGAS PARKIR
-// Merepresentasikan petugas yang mengelola parkir.
-// Properti:
-//   - nama  : String (nama petugas)
-//   - shift : String (shift kerja petugas)
-// Method:
-//   - laporan(slotTerisi, totalSlot) : membuat laporan okupansi
-// ============================================================
-class PetugasParkir {
-  String nama;
-  String shift;
-  
-  PetugasParkir(this.nama, this.shift);
-  
-  void laporan(int slotTerisi, int totalSlot) {
-    double okupansi = (slotTerisi / totalSlot) * 100;
-    print("📊 LAPORAN PARKIR");
-    print("═" * 30);
-    print("Petugas      : $nama");
-    print("Shift        : $shift");
-    print("Slot Terisi  : $slotTerisi / $totalSlot");
-    print("Okupansi     : ${okupansi.toStringAsFixed(1)}%");
-    if (okupansi > 80) {
-      print("⚠️  Status: PARKIR PENUH! Rekomendasi buka area baru.");
-    } else if (okupansi > 50) {
-      print("🟡 Status: Cukup ramai.");
-    } else {
-      print("🟢 Status: Tersedia banyak slot.");
-    }
-    print("═" * 30);
-  }
-}
-
-// ============================================================
-// FUNGSI MAIN - SIMULASI SISTEM PARKIR
-// ============================================================
-void main() {
-  print("🏢 SMART PARKING SYSTEM - SIMULASI LENGKAP");
-  print("=" * 50);
-  
-  // =========================================
-  // 1. DEMO CLASS KENDARAAN
-  // =========================================
-  print("\n📌 DEMO 1: CLASS KENDARAAN");
-  print("-" * 40);
-  Kendaraan mobil1 = Kendaraan("B 2026 XC", "Mobil", DateTime(2026, 6, 10, 9, 30));
-  mobil1.infoKendaraan();
-  Kendaraan motor1 = Kendaraan("AG 1234 Z", "Motor", DateTime(2026, 6, 10, 10, 0));
-  motor1.infoKendaraan();
-  Kendaraan truk1 = Kendaraan("N 5678 AB", "Truk", DateTime(2026, 6, 10, 11, 15));
-  truk1.infoKendaraan();
-  
-  // =========================================
-  // 2. DEMO SLOT PARKIR + INHERITANCE
-  // =========================================
-  print("\n📌 DEMO 2: SLOT PARKIR (INHERITANCE)");
-  print("-" * 40);
-  SlotParkir slot1 = SlotParkir(1, "A1", true);
-  slot1.infoZona();  // method dari parent class AreaParkir
-  slot1.infoSlot();
-  
-  print("\n--- Proses Parkir ---");
-  slot1.tempatiSlot("B 1234 AB");
-  slot1.infoSlot();
-  
-  slot1.bebaskanSlot();
-  slot1.infoSlot();
-  
-  print("\n--- Parkir Kendaraan Lain ---");
-  slot1.tempatiSlot("D 9876 ZZ");
-  slot1.infoSlot();
-  
-  // =========================================
-  // 3. DEMO TRANSAKSI & PETUGAS
-  // =========================================
-  print("\n📌 DEMO 3: TRANSAKSI & PETUGAS");
-  print("-" * 40);
-  
-  // Transaksi 1
-  TransaksiParkir trans1 = TransaksiParkir("TRX-001", "B 1234 AB", 3);
-  trans1.cetakStruk();
-  
-  print("");
-  
-  // Transaksi 2
-  TransaksiParkir trans2 = TransaksiParkir("TRX-002", "AG 5678 Z", 1);
-  trans2.cetakStruk();
-  
-  print("");
-  
-  // Petugas 1
-  PetugasParkir petugas1 = PetugasParkir("Budi Santoso", "Pagi (08:00-16:00)");
-  petugas1.laporan(15, 20);
-  
-  print("");
-  
-  // Petugas 2
-  PetugasParkir petugas2 = PetugasParkir("Siti Rahayu", "Malam (16:00-00:00)");
-  petugas2.laporan(9, 20);
-  
-  // =========================================
-  // 4. SIMULASI LENGKAP
-  // =========================================
-  print("\n📌 DEMO 4: SIMULASI LENGKAP");
-  print("-" * 40);
-  
-  // Inisialisasi Petugas
-  print("\n👤 PETUGAS");
-  PetugasParkir petugas = PetugasParkir("Ahmad", "Pagi");
-  print("Petugas: ${petugas.nama} (Shift ${petugas.shift})");
-  
-  // Inisialisasi Slot Parkir
-  print("\n🅿️ SLOT PARKIR");
-  var slots = [
-    SlotParkir(1, "A", true),
-    SlotParkir(2, "A", true),
-    SlotParkir(3, "B", true),
-    SlotParkir(4, "B", true),
-    SlotParkir(5, "C", true),
-  ];
-  print("Total slot tersedia: ${slots.length}");
-  
-  // Inisialisasi Kendaraan
-  print("\n🚗 KENDARAAN");
-  var kendaraanList = [
-    Kendaraan("B 1234 AB", "Mobil", DateTime(2026, 6, 10, 9, 0)),
-    Kendaraan("AG 5678 Z", "Motor", DateTime(2026, 6, 10, 10, 15)),
-    Kendaraan("D 9876 ZZ", "Mobil", DateTime(2026, 6, 10, 11, 30)),
-    Kendaraan("N 1111 AA", "Truk", DateTime(2026, 6, 10, 13, 45)),
-  ];
-  
-  // Proses Parkir
-  print("\n🔄 PROSES PARKIR");
-  int slotTerisi = 0;
-  var transaksiList = [];
-  
-  for (var i = 0; i < kendaraanList.length && i < slots.length; i++) {
-    var kendaraan = kendaraanList[i];
-    var slot = slots[i];
-    print("\n--- Parkir Kendaraan ${i+1} ---");
-    kendaraan.infoKendaraan();
-    if (slot.tempatiSlot(kendaraan.platNomor)) {
-      slotTerisi++;
-      int durasi = (i + 1) * 2; // Durasi bervariasi
-      var transaksi = TransaksiParkir(
-        "TRX-${(i+1).toString().padLeft(3, '0')}", 
-        kendaraan.platNomor, 
-        durasi
-      );
-      transaksiList.add(transaksi);
-    }
-  }
-  
-  // Laporan Akhir
-  print("\n📋 LAPORAN AKHIR");
-  petugas.laporan(slotTerisi, slots.length);
-  
-  // Tampilkan Transaksi
-  print("\n💰 TRANSAKSI");
-  for (var trans in transaksiList) {
-    trans.cetakStruk();
-    print("");
-  }
-  
-  print("=" * 50);
-  print("✅ Simulasi selesai! Terima kasih.");
-}</pre>
+                <iframe 
+                    id="dartpadFrame"
+                    src="https://dartpad.dev/embed-dart.html?id=70a8b270caa99a218fe2b8fefe9c20a6&theme=dark"
+                    allowfullscreen
+                    loading="lazy"
+                    sandbox="allow-scripts allow-same-origin allow-forms"
+                    title="DartPad - Smart Parking System"
+                ></iframe>
             </div>
-            <div id="output-mergedCode" class="output-console">
-                <div class="console-header"><i class="fas fa-terminal"></i> Output:</div>
-                <div id="console-mergedCode"></div>
+
+            <div style="margin-top: 10px; font-size: 0.8rem; color: #6b8fa0; text-align: center; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                <span><i class="fas fa-info-circle"></i> Klik "Run" di DartPad untuk menjalankan simulasi</span>
+                <span><i class="fas fa-edit"></i> Kode dapat diedit langsung di DartPad</span>
+                <span><i class="fas fa-share-alt"></i> Klik "Buka Fullscreen" untuk tampilan lebih luas</span>
             </div>
         </div>
 
@@ -1006,110 +691,98 @@ void main() {
     });
 
     // ============================================================
-    // DARTPAD INTEGRATION - SMART PARKING SYSTEM
+    // DARTPAD INTEGRATION
     // ============================================================
     
-    // Gunakan link DartPad yang sudah Anda buat
-    const DARTPAD_ID = '70a8b270caa99a218fe2b8fefe9c20a6';
-    const DARTPAD_EMBED_URL = `https://dartpad.dev/embed-dart.html?id=${DARTPAD_ID}&theme=dark`;
+    const DARTPAD_ID = '9131391bba306303d1eee63677831ce8';
+    const DARTPAD_EMBED_URL = `https://dartpad.dev/embed-dart.html?id=${DARTPAD_ID}&theme=dark&run=true`;
     const DARTPAD_FULL_URL = `https://dartpad.dev/?id=${DARTPAD_ID}`;
-    
-    // Fungsi untuk menjalankan simulasi di DartPad
-    function runDartSimulation(codeId) {
-        const outputDiv = document.getElementById('output-' + codeId);
-        const consoleDiv = document.getElementById('console-' + codeId);
-        
-        if (!outputDiv || !consoleDiv) {
-            console.error('Element not found for codeId:', codeId);
-            return;
-        }
 
-        // Tampilkan output
-        outputDiv.classList.add('active');
-        outputDiv.style.display = 'block';
+    // Fungsi untuk menjalankan DartPad
+    function runDartPad() {
+        const frame = document.getElementById('dartpadFrame');
+        if (!frame) return;
         
-        // Tampilkan DartPad dalam iframe
-        consoleDiv.innerHTML = `
-            <div style="padding: 5px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
-                    <span style="color: #78c8ff; font-size: 0.9rem;">
-                        <i class="fas fa-code"></i> Kode Dart - Smart Parking System
-                        <span style="background: rgba(0,212,255,0.15); padding: 2px 10px; border-radius: 20px; font-size: 0.7rem; margin-left: 8px;">
-                            <i class="fas fa-play"></i> Klik Run untuk menjalankan
-                        </span>
-                    </span>
-                    <a href="${DARTPAD_FULL_URL}" target="_blank" style="
-                        background: linear-gradient(95deg, #0077b6, #00b4d8);
-                        color: white;
-                        padding: 8px 18px;
-                        border-radius: 40px;
-                        text-decoration: none;
-                        font-weight: 600;
-                        font-size: 0.8rem;
-                        transition: all 0.3s;
-                        display: inline-flex;
-                        align-items: center;
-                        gap: 8px;
-                        border: 1px solid rgba(255,255,255,0.1);
-                    ">
-                        <i class="fas fa-external-link-alt"></i> Buka di DartPad
-                    </a>
-                </div>
-                <div class="dartpad-container">
-                    <iframe 
-                        src="${DARTPAD_EMBED_URL}" 
-                        allowfullscreen
-                        loading="lazy"
-                        sandbox="allow-scripts allow-same-origin allow-forms"
-                        title="DartPad - Smart Parking System"
-                    ></iframe>
-                </div>
-                <div style="margin-top: 10px; font-size: 0.75rem; color: #6b8fa0; text-align: center; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
-                    <span><i class="fas fa-info-circle"></i> Klik "Run" di DartPad untuk menjalankan simulasi</span>
-                    <span><i class="fas fa-edit"></i> Kode bisa diedit langsung di DartPad</span>
-                    <span><i class="fas fa-share-alt"></i> Klik "Buka di DartPad" untuk fullscreen</span>
-                </div>
-            </div>
-        `;
+        // Reload frame dengan parameter run=true untuk auto-run
+        frame.src = DARTPAD_EMBED_URL;
         
-        // Scroll ke output dengan delay
-        setTimeout(() => {
-            outputDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }, 300);
+        // Tampilkan notifikasi
+        showToast('🔄 DartPad sedang dimuat... Klik "Run" jika tidak otomatis berjalan');
     }
 
-    // Fungsi copy code
-    function copyCode(codeId) {
-        const codeElement = document.getElementById(codeId);
-        if (!codeElement) return;
-        
-        let code = codeElement.textContent;
-        navigator.clipboard.writeText(code).then(() => {
-            // Cari tombol yang diklik
-            const btns = document.querySelectorAll('.btn-copy');
-            let btn = null;
-            btns.forEach(b => {
-                if (b.textContent.includes('Copy')) {
-                    btn = b;
-                }
-            });
-            if (btn) {
-                const originalText = btn.innerHTML;
-                btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
-                setTimeout(() => {
-                    btn.innerHTML = originalText;
-                }, 2000);
-            }
+    // Fungsi copy kode
+    function copyCode() {
+        // Ambil kode dari iframe (tidak bisa langsung, jadi ambil dari sumber)
+        // Karena kode ada di DartPad, kita arahkan ke link full
+        navigator.clipboard.writeText(
+            '// Smart Parking Management System - OOP Dart\n' +
+            '// https://dartpad.dev/?id=' + DARTPAD_ID + '\n' +
+            '// Kode lengkap tersedia di DartPad'
+        ).then(() => {
+            showToast('✅ Link DartPad telah disalin!');
         }).catch(err => {
-            console.error('Failed to copy: ', err);
+            // Fallback: salin link
+            const link = DARTPAD_FULL_URL;
+            navigator.clipboard.writeText(link).then(() => {
+                showToast('✅ Link DartPad disalin: ' + link);
+            });
         });
     }
 
-    // Auto-run pada load
-    document.addEventListener('DOMContentLoaded', function() {
+    // Toast notification
+    function showToast(message) {
+        // Hapus toast yang ada
+        const oldToast = document.querySelector('.toast-notification');
+        if (oldToast) oldToast.remove();
+
+        const toast = document.createElement('div');
+        toast.className = 'toast-notification';
+        toast.innerHTML = message;
+        toast.style.cssText = `
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 20, 30, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 12px 24px;
+            border-radius: 60px;
+            border: 1px solid #00d4ff;
+            color: #eef4ff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.9rem;
+            z-index: 9999;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            text-align: center;
+            max-width: 90%;
+            animation: slideUp 0.3s ease;
+        `;
+        document.body.appendChild(toast);
+
+        // Auto hide after 4 seconds
         setTimeout(() => {
-            runDartSimulation('mergedCode');
-        }, 500);
+            toast.style.opacity = '0';
+            toast.style.transition = 'opacity 0.5s ease';
+            setTimeout(() => toast.remove(), 500);
+        }, 4000);
+    }
+
+    // Animasi slide up untuk toast
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+    `;
+    document.head.appendChild(style);
+
+    // Auto-run ketika halaman dimuat
+    document.addEventListener('DOMContentLoaded', function() {
+        // Tampilkan notifikasi sambutan
+        setTimeout(() => {
+            showToast('🚀 Smart Parking System siap! Klik "Jalankan di DartPad" untuk menjalankan');
+        }, 1000);
     });
 </script>
 
