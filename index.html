@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- AOS Animations -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <!-- Mermaid untuk Class Diagram -->
+    <!-- Mermaid untuk Class Diagram & Flowchart -->
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
     <script>
         mermaid.initialize({ startOnLoad: true, theme: 'dark' });
@@ -454,6 +454,125 @@
             text-decoration: underline;
         }
 
+        /* ========== STYLE UNTUK FLOWCHART & PSEUDOCODE ========== */
+        .flowchart-pseudo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 1.5rem 0;
+        }
+
+        .fp-card {
+            background: rgba(0, 20, 30, 0.6);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid rgba(0, 212, 255, 0.25);
+        }
+
+        .fp-card h3 {
+            color: #7ee0ff;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .fp-card h3 .badge-fp {
+            font-size: 0.65rem;
+            background: rgba(0,212,255,0.15);
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            color: #00d4ff;
+            font-weight: 600;
+        }
+
+        .fp-card .flowchart-container {
+            background: #05161f;
+            border-radius: 1rem;
+            padding: 1rem;
+            overflow-x: auto;
+        }
+
+        .fp-card .flowchart-container mermaid {
+            background: transparent;
+        }
+
+        .fp-card .pseudo-container {
+            background: #0a1a28;
+            border-radius: 1rem;
+            padding: 1.2rem;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.7rem;
+            line-height: 1.8;
+            color: #cdd6f4;
+            max-height: 500px;
+            overflow-y: auto;
+            border: 1px solid rgba(0,212,255,0.1);
+        }
+
+        .fp-card .pseudo-container .comment {
+            color: #6c7086;
+            font-style: italic;
+        }
+        .fp-card .pseudo-container .keyword {
+            color: #cba6f7;
+            font-weight: bold;
+        }
+        .fp-card .pseudo-container .class-name {
+            color: #f9e2af;
+        }
+        .fp-card .pseudo-container .string {
+            color: #a6e3a1;
+        }
+        .fp-card .pseudo-container .function {
+            color: #89b4fa;
+        }
+        .fp-card .pseudo-container .var {
+            color: #f38ba8;
+        }
+
+        .fp-card .caption {
+            text-align: center;
+            color: #6b8fa0;
+            font-size: 0.8rem;
+            margin-top: 0.8rem;
+        }
+
+        .solid-badge-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .solid-badge-item {
+            background: rgba(0,212,255,0.05);
+            padding: 0.8rem 1rem;
+            border-radius: 1rem;
+            border-left: 3px solid;
+            text-align: center;
+        }
+
+        .solid-badge-item strong {
+            font-size: 1.1rem;
+        }
+        .solid-badge-item span {
+            color: #8ab4d6;
+            font-size: 0.75rem;
+        }
+
+        @media (max-width: 768px) {
+            .flowchart-pseudo-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            .fp-card .pseudo-container {
+                max-height: 350px;
+                font-size: 0.65rem;
+            }
+        }
+
         @media (max-width: 720px) {
             body {
                 padding: 1rem 0.8rem;
@@ -489,6 +608,15 @@
             }
             .merged-code-section {
                 padding: 1rem;
+            }
+            .flowchart-pseudo-grid {
+                grid-template-columns: 1fr;
+            }
+            .solid-badge-grid {
+                grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            }
+            .solid-badge-item span {
+                font-size: 0.65rem;
             }
         }
     </style>
@@ -643,6 +771,196 @@ classDiagram
                 <span><i class="fas fa-share-alt"></i> Klik "Buka Fullscreen" untuk tampilan lebih luas</span>
             </div>
         </div>
+
+        <!-- ============================================================ -->
+        <!-- FLOWCHART & PSEUDOCODE (TAMBAHAN BARU)                       -->
+        <!-- ============================================================ -->
+        <div class="section-card" data-aos="fade-up">
+            <h2><i class="fas fa-project-diagram"></i> FLOWCHART & PSEUDOCODE (SOLID OOP)</h2>
+            <p style="margin-bottom: 1.5rem; color: #8ab4d6;">
+                Berikut adalah <strong>flowchart</strong> yang menggambarkan alur sistem secara visual dan 
+                <strong>pseudocode</strong> yang menerapkan prinsip SOLID dalam pengembangan sistem parkir ini.
+            </p>
+
+            <!-- GRID 2 KOLOM -->
+            <div class="flowchart-pseudo-grid">
+                
+                <!-- KOLOM KIRI: FLOWCHART -->
+                <div class="fp-card">
+                    <h3>
+                        <i class="fas fa-route"></i> Flowchart Sistem
+                        <span class="badge-fp">Mermaid</span>
+                    </h3>
+                    <div class="flowchart-container">
+                        <pre class="mermaid" style="background: transparent;">
+flowchart TD
+    A[Mulai] --> B[Inisialisasi Sistem]
+    B --> C[Tampilkan Menu Utama]
+    C --> D{Pilih Aksi}
+    
+    D -->|1. Parkir Kendaraan| E[Input Plat Nomor & Jenis]
+    E --> F[Cari Slot Kosong]
+    F --> G{Slot Tersedia?}
+    G -->|Ya| H[Tempati Slot & catat waktu]
+    G -->|Tidak| I[Tampilkan Pesan Penuh]
+    H --> J[Tampilkan Konfirmasi]
+    I --> C
+    J --> C
+    
+    D -->|2. Bebaskan Slot| K[Input Nomor Slot]
+    K --> L{Slot Terisi?}
+    L -->|Ya| M[Hitung Durasi Parkir]
+    M --> N[Hitung Biaya Total]
+    N --> O[Cetak Struk Transaksi]
+    O --> P[Bebaskan Slot]
+    L -->|Tidak| Q[Tampilkan Pesan Kosong]
+    P --> C
+    Q --> C
+    
+    D -->|3. Lihat Laporan| R[Hitung Jumlah Slot Terisi]
+    R --> S[Hitung Persentase Okupansi]
+    S --> T[Tampilkan Laporan + Status]
+    T --> C
+    
+    D -->|4. Keluar| U[Selesai]
+                        </pre>
+                    </div>
+                    <p class="caption">
+                        <i class="fas fa-info-circle"></i> Alur program dari masuk hingga keluar kendaraan
+                    </p>
+                </div>
+
+                <!-- KOLOM KANAN: PSEUDOCODE -->
+                <div class="fp-card">
+                    <h3>
+                        <i class="fas fa-code"></i> Pseudocode SOLID
+                        <span class="badge-fp">OOP Design</span>
+                    </h3>
+                    <div class="pseudo-container">
+<pre><span class="comment">// =============================================</span>
+<span class="comment">// 1. INTERFACE (KONTRAK) - DIP & ISP</span>
+<span class="comment">// =============================================</span>
+<span class="keyword">INTERFACE</span> <span class="class-name">IPricingStrategy</span>
+    <span class="function">METHOD</span> calculateCost(vehicleType, duration) : Double
+<span class="keyword">END INTERFACE</span>
+
+<span class="keyword">INTERFACE</span> <span class="class-name">IReceiptPrinter</span>
+    <span class="function">METHOD</span> print(receiptData)
+<span class="keyword">END INTERFACE</span>
+
+<span class="comment">// =============================================</span>
+<span class="comment">// 2. IMPLEMENTASI KONKRET (OCP & LSP)</span>
+<span class="comment">// =============================================</span>
+<span class="keyword">CLASS</span> <span class="class-name">StandardPricing</span> IMPLEMENTS IPricingStrategy
+    <span class="keyword">PRIVATE</span> initialRate = 4000
+    <span class="keyword">PRIVATE</span> hourlyRate = 2000
+    
+    <span class="function">METHOD</span> calculateCost(type, duration) : Double
+        dur = CEIL(duration)
+        <span class="keyword">IF</span> dur &lt;= 1 <span class="keyword">THEN</span> <span class="keyword">RETURN</span> initialRate
+        <span class="keyword">ELSE</span> <span class="keyword">RETURN</span> initialRate + (dur-1) * hourlyRate
+    <span class="keyword">END METHOD</span>
+<span class="keyword">END CLASS</span>
+
+<span class="keyword">CLASS</span> <span class="class-name">ConsolePrinter</span> IMPLEMENTS IReceiptPrinter
+    <span class="function">METHOD</span> print(data)
+        <span class="keyword">PRINT</span> "Struk: " + data.total
+    <span class="keyword">END METHOD</span>
+<span class="keyword">END CLASS</span>
+
+<span class="comment">// =============================================</span>
+<span class="comment">// 3. ENTITAS (SRP)</span>
+<span class="comment">// =============================================</span>
+<span class="keyword">CLASS</span> <span class="class-name">Vehicle</span>
+    <span class="keyword">PRIVATE</span> plateNumber, type, entryTime
+    <span class="function">METHOD</span> getDuration() : RETURN (NOW - entryTime) / 3600
+<span class="keyword">END CLASS</span>
+
+<span class="keyword">CLASS</span> <span class="class-name">ParkingSlot</span>
+    <span class="keyword">PRIVATE</span> slotNumber, zone, isOccupied, vehicle
+    <span class="function">METHOD</span> occupy(v) : SET isOccupied = TRUE, vehicle = v
+    <span class="function">METHOD</span> free() : SET isOccupied = FALSE, vehicle = NULL
+<span class="keyword">END CLASS</span>
+
+<span class="comment">// =============================================</span>
+<span class="comment">// 4. REPOSITORY (SRP)</span>
+<span class="comment">// =============================================</span>
+<span class="keyword">CLASS</span> <span class="class-name">ParkingLotRepository</span>
+    <span class="keyword">PRIVATE</span> slots : Array
+    <span class="function">METHOD</span> findAvailableSlot() : RETURN slot kosong
+    <span class="function">METHOD</span> getOccupiedCount() : RETURN jumlah terisi
+<span class="keyword">END CLASS</span>
+
+<span class="comment">// =============================================</span>
+<span class="comment">// 5. SERVICE BISNIS (DIP - HIGH LEVEL)</span>
+<span class="comment">// =============================================</span>
+<span class="keyword">CLASS</span> <span class="class-name">ParkingTransactionService</span>
+    <span class="keyword">CONSTRUCTOR</span>(repository, pricing, printer) <span class="comment">// INJECT DEPENDENCIES</span>
+    
+    <span class="function">METHOD</span> parkVehicle(plate, type)
+        slot = repository.findAvailableSlot()
+        <span class="keyword">IF</span> slot == NULL <span class="keyword">THEN</span> PRINT "Penuh!" ; RETURN
+        vehicle = NEW Vehicle(plate, type)
+        slot.occupy(vehicle)
+    <span class="keyword">END METHOD</span>
+    
+    <span class="function">METHOD</span> exitVehicle(slotNumber)
+        slot = repository.findSlotByNumber(slotNumber)
+        duration = slot.vehicle.getDuration()
+        total = pricing.calculateCost(type, duration) <span class="comment">// POLIMORFISME</span>
+        printer.print({total, ...}) <span class="comment">// POLIMORFISME</span>
+        slot.free()
+    <span class="keyword">END METHOD</span>
+    
+    <span class="function">METHOD</span> generateReport(name, shift)
+        okupansi = (occupied / total) * 100
+        PRINT "Petugas: " + name + ", Okupansi: " + okupansi + "%"
+    <span class="keyword">END METHOD</span>
+<span class="keyword">END CLASS</span>
+
+<span class="comment">// =============================================</span>
+<span class="comment">// 6. MAIN PROGRAM (INISIALISASI)</span>
+<span class="comment">// =============================================</span>
+<span class="function">PROCEDURE</span> main()
+    pricing = NEW StandardPricing()
+    printer = NEW ConsolePrinter()
+    repo = NEW ParkingLotRepository(10)
+    service = NEW ParkingTransactionService(repo, pricing, printer)
+    
+    service.parkVehicle("B 1234 ABC", "Mobil")
+    service.exitVehicle(1)
+    service.generateReport("Usman Yakin", "Pagi")
+<span class="keyword">END PROCEDURE</span></pre>
+                    </div>
+                    <p class="caption">
+                        <i class="fas fa-check-circle" style="color: #00d4ff;"></i> 
+                        Dirancang dengan prinsip SOLID: SRP, OCP, LSP, ISP, DIP
+                    </p>
+                </div>
+            </div>
+
+            <!-- SOLID BADGE GRID -->
+            <div class="solid-badge-grid">
+                <div class="solid-badge-item" style="border-color: #e74c3c;">
+                    <strong style="color: #e74c3c;">S</strong> <span>SRP - Single Responsibility</span>
+                </div>
+                <div class="solid-badge-item" style="border-color: #f39c12;">
+                    <strong style="color: #f39c12;">O</strong> <span>OCP - Open/Closed</span>
+                </div>
+                <div class="solid-badge-item" style="border-color: #2ecc71;">
+                    <strong style="color: #2ecc71;">L</strong> <span>LSP - Liskov Substitution</span>
+                </div>
+                <div class="solid-badge-item" style="border-color: #3498db;">
+                    <strong style="color: #3498db;">I</strong> <span>ISP - Interface Segregation</span>
+                </div>
+                <div class="solid-badge-item" style="border-color: #9b59b6;">
+                    <strong style="color: #9b59b6;">D</strong> <span>DIP - Dependency Inversion</span>
+                </div>
+            </div>
+        </div>
+        <!-- ============================================================ -->
+        <!-- AKHIR FLOWCHART & PSEUDOCODE                                 -->
+        <!-- ============================================================ -->
 
         <!-- KESIMPULAN -->
         <div class="section-card" data-aos="fade-up">
