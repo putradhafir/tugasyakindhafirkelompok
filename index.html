@@ -454,123 +454,60 @@
             text-decoration: underline;
         }
 
-        /* ========== STYLE UNTUK FLOWCHART & PSEUDOCODE ========== */
-        .flowchart-pseudo-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin: 1.5rem 0;
-        }
-
-        .fp-card {
-            background: rgba(0, 20, 30, 0.6);
-            border-radius: 1.5rem;
-            padding: 1.5rem;
-            border: 1px solid rgba(0, 212, 255, 0.25);
-        }
-
-        .fp-card h3 {
-            color: #7ee0ff;
-            margin-top: 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .fp-card h3 .badge-fp {
-            font-size: 0.65rem;
-            background: rgba(0,212,255,0.15);
-            padding: 0.2rem 0.8rem;
-            border-radius: 20px;
-            color: #00d4ff;
-            font-weight: 600;
-        }
-
-        .fp-card .flowchart-container {
+        /* ========== STYLE UNTUK FLOWCHART ========== */
+        .flowchart-container {
             background: #05161f;
             border-radius: 1rem;
-            padding: 1rem;
+            padding: 1.5rem;
             overflow-x: auto;
+            border: 1px solid rgba(0, 212, 255, 0.15);
         }
 
-        .fp-card .flowchart-container mermaid {
+        .flowchart-container mermaid {
             background: transparent;
         }
 
-        .fp-card .pseudo-container {
+        /* ========== STYLE UNTUK PSEUDOCODE ========== */
+        .pseudo-container {
             background: #0a1a28;
             border-radius: 1rem;
-            padding: 1.2rem;
+            padding: 1.5rem;
             overflow-x: auto;
             font-family: 'Fira Code', monospace;
-            font-size: 0.7rem;
-            line-height: 1.8;
+            font-size: 0.75rem;
+            line-height: 1.9;
             color: #cdd6f4;
-            max-height: 500px;
+            max-height: 600px;
             overflow-y: auto;
             border: 1px solid rgba(0,212,255,0.1);
         }
 
-        .fp-card .pseudo-container .comment {
+        .pseudo-container .comment {
             color: #6c7086;
             font-style: italic;
         }
-        .fp-card .pseudo-container .keyword {
+        .pseudo-container .keyword {
             color: #cba6f7;
             font-weight: bold;
         }
-        .fp-card .pseudo-container .class-name {
+        .pseudo-container .class-name {
             color: #f9e2af;
         }
-        .fp-card .pseudo-container .string {
+        .pseudo-container .string {
             color: #a6e3a1;
         }
-        .fp-card .pseudo-container .function {
+        .pseudo-container .function {
             color: #89b4fa;
         }
-        .fp-card .pseudo-container .var {
+        .pseudo-container .var {
             color: #f38ba8;
         }
 
-        .fp-card .caption {
+        .caption-text {
             text-align: center;
             color: #6b8fa0;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             margin-top: 0.8rem;
-        }
-
-        .solid-badge-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 0.8rem;
-            margin-top: 1rem;
-        }
-
-        .solid-badge-item {
-            background: rgba(0,212,255,0.05);
-            padding: 0.8rem 1rem;
-            border-radius: 1rem;
-            border-left: 3px solid;
-            text-align: center;
-        }
-
-        .solid-badge-item strong {
-            font-size: 1.1rem;
-        }
-        .solid-badge-item span {
-            color: #8ab4d6;
-            font-size: 0.75rem;
-        }
-
-        @media (max-width: 768px) {
-            .flowchart-pseudo-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-            .fp-card .pseudo-container {
-                max-height: 350px;
-                font-size: 0.65rem;
-            }
         }
 
         @media (max-width: 720px) {
@@ -609,14 +546,13 @@
             .merged-code-section {
                 padding: 1rem;
             }
-            .flowchart-pseudo-grid {
-                grid-template-columns: 1fr;
-            }
-            .solid-badge-grid {
-                grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-            }
-            .solid-badge-item span {
+            .pseudo-container {
+                max-height: 400px;
                 font-size: 0.65rem;
+                padding: 1rem;
+            }
+            .flowchart-container {
+                padding: 0.8rem;
             }
         }
     </style>
@@ -773,26 +709,18 @@ classDiagram
         </div>
 
         <!-- ============================================================ -->
-        <!-- FLOWCHART & PSEUDOCODE (TAMBAHAN BARU)                       -->
+        <!-- BAGIAN FLOWCHART                                              -->
         <!-- ============================================================ -->
         <div class="section-card" data-aos="fade-up">
-            <h2><i class="fas fa-project-diagram"></i> FLOWCHART & PSEUDOCODE (SOLID OOP)</h2>
+            <h2><i class="fas fa-route"></i> FLOWCHART SISTEM</h2>
             <p style="margin-bottom: 1.5rem; color: #8ab4d6;">
-                Berikut adalah <strong>flowchart</strong> yang menggambarkan alur sistem secara visual dan 
-                <strong>pseudocode</strong> yang menerapkan prinsip SOLID dalam pengembangan sistem parkir ini.
+                Diagram alir berikut menggambarkan <strong>alur proses</strong> sistem Smart Parking Management 
+                dari mulai kendaraan masuk hingga keluar, termasuk transaksi dan pelaporan.
             </p>
 
-            <!-- GRID 2 KOLOM -->
-            <div class="flowchart-pseudo-grid">
-                
-                <!-- KOLOM KIRI: FLOWCHART -->
-                <div class="fp-card">
-                    <h3>
-                        <i class="fas fa-route"></i> Flowchart Sistem
-                        <span class="badge-fp">Mermaid</span>
-                    </h3>
-                    <div class="flowchart-container">
-                        <pre class="mermaid" style="background: transparent;">
+            <!-- Flowchart -->
+            <div class="flowchart-container">
+                <pre class="mermaid" style="background: transparent;">
 flowchart TD
     A[Mulai] --> B[Inisialisasi Sistem]
     B --> C[Tampilkan Menu Utama]
@@ -823,20 +751,28 @@ flowchart TD
     T --> C
     
     D -->|4. Keluar| U[Selesai]
-                        </pre>
-                    </div>
-                    <p class="caption">
-                        <i class="fas fa-info-circle"></i> Alur program dari masuk hingga keluar kendaraan
-                    </p>
-                </div>
+                </pre>
+            </div>
+            <p class="caption-text">
+                <i class="fas fa-info-circle"></i> Alur program dari masuk hingga keluar kendaraan
+            </p>
+        </div>
+        <!-- ============================================================ -->
+        <!-- AKHIR BAGIAN FLOWCHART                                       -->
+        <!-- ============================================================ -->
 
-                <!-- KOLOM KANAN: PSEUDOCODE -->
-                <div class="fp-card">
-                    <h3>
-                        <i class="fas fa-code"></i> Pseudocode SOLID
-                        <span class="badge-fp">OOP Design</span>
-                    </h3>
-                    <div class="pseudo-container">
+        <!-- ============================================================ -->
+        <!-- BAGIAN PSEUDOCODE                                            -->
+        <!-- ============================================================ -->
+        <div class="section-card" data-aos="fade-up">
+            <h2><i class="fas fa-code"></i> PSEUDOCODE </h2>
+            <p style="margin-bottom: 1.5rem; color: #8ab4d6;">
+                Berikut adalah <strong>pseudocode</strong> sistem Smart Parking Management yang menerapkan 
+                prinsip <strong>SOLID</strong> dalam pengembangan perangkat lunak berbasis OOP.
+            </p>
+
+            <!-- Pseudocode -->
+            <div class="pseudo-container">
 <pre><span class="comment">// =============================================</span>
 <span class="comment">// 1. INTERFACE (KONTRAK) - DIP & ISP</span>
 <span class="comment">// =============================================</span>
@@ -931,35 +867,33 @@ flowchart TD
     service.exitVehicle(1)
     service.generateReport("Usman Yakin", "Pagi")
 <span class="keyword">END PROCEDURE</span></pre>
-                    </div>
-                    <p class="caption">
-                        <i class="fas fa-check-circle" style="color: #00d4ff;"></i> 
-                        Dirancang dengan prinsip SOLID: SRP, OCP, LSP, ISP, DIP
-                    </p>
-                </div>
             </div>
+            <p class="caption-text">
+                <i class="fas fa-check-circle" style="color: #00d4ff;"></i> 
+                Dirancang dengan prinsip SOLID: <strong>S</strong>RP, <strong>O</strong>CP, <strong>L</strong>SP, <strong>I</strong>SP, <strong>D</strong>IP
+            </p>
 
-            <!-- SOLID BADGE GRID -->
-            <div class="solid-badge-grid">
-                <div class="solid-badge-item" style="border-color: #e74c3c;">
-                    <strong style="color: #e74c3c;">S</strong> <span>SRP - Single Responsibility</span>
+            <!-- SOLID Badge Grid -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.8rem; margin-top: 1.5rem;">
+                <div style="background: rgba(0,212,255,0.05); padding: 0.8rem 1rem; border-radius: 1rem; border-left: 3px solid #e74c3c; text-align: center;">
+                    <strong style="color: #e74c3c;">S</strong> <span style="color: #8ab4d6; font-size: 0.75rem;">SRP - Single Responsibility</span>
                 </div>
-                <div class="solid-badge-item" style="border-color: #f39c12;">
-                    <strong style="color: #f39c12;">O</strong> <span>OCP - Open/Closed</span>
+                <div style="background: rgba(0,212,255,0.05); padding: 0.8rem 1rem; border-radius: 1rem; border-left: 3px solid #f39c12; text-align: center;">
+                    <strong style="color: #f39c12;">O</strong> <span style="color: #8ab4d6; font-size: 0.75rem;">OCP - Open/Closed</span>
                 </div>
-                <div class="solid-badge-item" style="border-color: #2ecc71;">
-                    <strong style="color: #2ecc71;">L</strong> <span>LSP - Liskov Substitution</span>
+                <div style="background: rgba(0,212,255,0.05); padding: 0.8rem 1rem; border-radius: 1rem; border-left: 3px solid #2ecc71; text-align: center;">
+                    <strong style="color: #2ecc71;">L</strong> <span style="color: #8ab4d6; font-size: 0.75rem;">LSP - Liskov Substitution</span>
                 </div>
-                <div class="solid-badge-item" style="border-color: #3498db;">
-                    <strong style="color: #3498db;">I</strong> <span>ISP - Interface Segregation</span>
+                <div style="background: rgba(0,212,255,0.05); padding: 0.8rem 1rem; border-radius: 1rem; border-left: 3px solid #3498db; text-align: center;">
+                    <strong style="color: #3498db;">I</strong> <span style="color: #8ab4d6; font-size: 0.75rem;">ISP - Interface Segregation</span>
                 </div>
-                <div class="solid-badge-item" style="border-color: #9b59b6;">
-                    <strong style="color: #9b59b6;">D</strong> <span>DIP - Dependency Inversion</span>
+                <div style="background: rgba(0,212,255,0.05); padding: 0.8rem 1rem; border-radius: 1rem; border-left: 3px solid #9b59b6; text-align: center;">
+                    <strong style="color: #9b59b6;">D</strong> <span style="color: #8ab4d6; font-size: 0.75rem;">DIP - Dependency Inversion</span>
                 </div>
             </div>
         </div>
         <!-- ============================================================ -->
-        <!-- AKHIR FLOWCHART & PSEUDOCODE                                 -->
+        <!-- AKHIR BAGIAN PSEUDOCODE                                      -->
         <!-- ============================================================ -->
 
         <!-- KESIMPULAN -->
@@ -1016,22 +950,14 @@ flowchart TD
     const DARTPAD_EMBED_URL = `https://dartpad.dev/embed-dart.html?id=${DARTPAD_ID}&theme=dark&run=true`;
     const DARTPAD_FULL_URL = `https://dartpad.dev/9131391bba306303d1eee63677831ce8${DARTPAD_ID}`;
 
-    // Fungsi untuk menjalankan DartPad
     function runDartPad() {
         const frame = document.getElementById('dartpadFrame');
         if (!frame) return;
-        
-        // Reload frame dengan parameter run=true untuk auto-run
         frame.src = DARTPAD_EMBED_URL;
-        
-        // Tampilkan notifikasi
         showToast('🔄 DartPad sedang dimuat... Klik "Run" jika tidak otomatis berjalan');
     }
 
-    // Fungsi copy kode
     function copyCode() {
-        // Ambil kode dari iframe (tidak bisa langsung, jadi ambil dari sumber)
-        // Karena kode ada di DartPad, kita arahkan ke link full
         navigator.clipboard.writeText(
             '// Smart Parking Management System - OOP Dart\n' +
             '// https://dartpad.dev/?id=' + DARTPAD_ID + '\n' +
@@ -1039,7 +965,6 @@ flowchart TD
         ).then(() => {
             showToast('✅ Link DartPad telah disalin!');
         }).catch(err => {
-            // Fallback: salin link
             const link = DARTPAD_FULL_URL;
             navigator.clipboard.writeText(link).then(() => {
                 showToast('✅ Link DartPad disalin: ' + link);
@@ -1047,9 +972,11 @@ flowchart TD
         });
     }
 
-    // Toast notification
+    // ============================================================
+    // TOAST NOTIFICATION
+    // ============================================================
+
     function showToast(message) {
-        // Hapus toast yang ada
         const oldToast = document.querySelector('.toast-notification');
         if (oldToast) oldToast.remove();
 
@@ -1077,7 +1004,6 @@ flowchart TD
         `;
         document.body.appendChild(toast);
 
-        // Auto hide after 4 seconds
         setTimeout(() => {
             toast.style.opacity = '0';
             toast.style.transition = 'opacity 0.5s ease';
@@ -1085,21 +1011,18 @@ flowchart TD
         }, 4000);
     }
 
-    // Animasi slide up untuk toast
-    const style = document.createElement('style');
-    style.textContent = `
+    const styleAnim = document.createElement('style');
+    styleAnim.textContent = `
         @keyframes slideUp {
             from { opacity: 0; transform: translateX(-50%) translateY(20px); }
             to { opacity: 1; transform: translateX(-50%) translateY(0); }
         }
     `;
-    document.head.appendChild(style);
+    document.head.appendChild(styleAnim);
 
-    // Auto-run ketika halaman dimuat
     document.addEventListener('DOMContentLoaded', function() {
-        // Tampilkan notifikasi sambutan
         setTimeout(() => {
-            showToast('🚀 Smart Parking System siap! Klik "Jalankan di DartPad" untuk menjalankan');
+            showToast('🚀 Smart Parking System siap!');
         }, 1000);
     });
 </script>
